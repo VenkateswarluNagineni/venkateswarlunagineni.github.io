@@ -23,6 +23,7 @@
     --green: #10B981;
     --indigo: #818CF8;
     --pink: #F472B6;
+    --teal: #2DD4BF;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,7 +46,6 @@
     cursor: none;
   }
 
-  /* Custom cursor */
   .cursor {
     position: fixed;
     width: 10px; height: 10px;
@@ -66,9 +66,7 @@
     transition: transform 0.4s ease, width 0.3s, height 0.3s, opacity 0.3s;
     transform: translate(-50%, -50%);
   }
-  body:hover .cursor { opacity: 1; }
 
-  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 1.25rem 3rem;
@@ -118,7 +116,6 @@
       radial-gradient(ellipse 40% 40% at 20% 80%, rgba(16,185,129,0.04) 0%, transparent 50%);
   }
 
-  /* Animated grid lines */
   .grid-lines {
     position: absolute; inset: 0;
     background-image:
@@ -132,7 +129,6 @@
     100% { background-position: 80px 80px; }
   }
 
-  /* Noise overlay */
   .noise::after {
     content: '';
     position: fixed; inset: 0; z-index: 0;
@@ -162,10 +158,7 @@
     margin-bottom: 1rem;
     opacity: 0; animation: fadeUp 0.9s 0.4s forwards;
   }
-  .hero-name em {
-    font-style: italic;
-    color: var(--amber);
-  }
+  .hero-name em { font-style: italic; color: var(--amber); }
 
   .hero-bottom {
     display: flex; justify-content: space-between; align-items: flex-end;
@@ -178,7 +171,7 @@
     font-size: clamp(1.1rem, 2vw, 1.5rem);
     color: var(--text-muted);
     font-style: italic;
-    max-width: 480px;
+    max-width: 500px;
     line-height: 1.6;
   }
 
@@ -196,7 +189,6 @@
   .hero-link:hover { color: var(--amber-light); }
   .hero-link::before { content: '→'; color: var(--amber); }
 
-  /* Scroll indicator */
   .scroll-indicator {
     position: absolute; right: 3rem; top: 50%;
     transform: translateY(-50%);
@@ -221,7 +213,6 @@
     writing-mode: vertical-rl;
   }
 
-  /* SECTION SHARED */
   section { padding: 8rem 3rem; }
   .section-inner { max-width: 1200px; margin: 0 auto; }
 
@@ -253,22 +244,20 @@
   }
   .section-title em { font-style: italic; color: var(--amber); }
 
-  /* Reveal animation */
   .reveal {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
   .reveal-delay-1 { transition-delay: 0.1s; }
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.3s; }
   .reveal-delay-4 { transition-delay: 0.4s; }
   .reveal-delay-5 { transition-delay: 0.5s; }
   .reveal-delay-6 { transition-delay: 0.6s; }
+  .reveal-delay-7 { transition-delay: 0.7s; }
+  .reveal-delay-8 { transition-delay: 0.8s; }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
@@ -279,7 +268,7 @@
     to { opacity: 1; }
   }
 
-  /* ─── IMPACT ─── */
+  /* IMPACT */
   #impact { background: var(--bg-2); }
 
   .impact-grid {
@@ -330,7 +319,7 @@
     line-height: 1.7;
   }
 
-  /* ─── EXPERIENCE ─── */
+  /* EXPERIENCE */
   #experience { background: var(--bg); }
 
   .exp-list { margin-top: 4rem; display: flex; flex-direction: column; gap: 0; }
@@ -376,7 +365,6 @@
   .tag-current { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
   .tag-ongoing { background: rgba(217,119,6,0.15); color: var(--amber); border: 1px solid rgba(217,119,6,0.3); }
 
-  .exp-right {}
   .exp-company {
     font-family: 'Playfair Display', serif;
     font-size: 1.6rem;
@@ -416,7 +404,7 @@
   }
   .chip:hover { background: var(--amber-glow); color: var(--amber-light); border-color: rgba(217,119,6,0.3); }
 
-  /* ─── SKILLS ─── */
+  /* SKILLS */
   #skills { background: var(--bg-2); }
 
   .skills-grid {
@@ -427,20 +415,11 @@
     align-items: start;
   }
 
-  /* Skill bars */
   .skill-bars { display: flex; flex-direction: column; gap: 1.4rem; }
   .skill-row { display: flex; flex-direction: column; gap: 6px; }
   .skill-row-top { display: flex; justify-content: space-between; align-items: baseline; }
-  .skill-name {
-    font-family: 'Crimson Pro', serif;
-    font-size: 1rem;
-    color: var(--text-muted);
-  }
-  .skill-pct {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--text-dim);
-  }
+  .skill-name { font-family: 'Crimson Pro', serif; font-size: 1rem; color: var(--text-muted); }
+  .skill-pct { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-dim); }
   .skill-track {
     height: 2px;
     background: rgba(240,235,227,0.07);
@@ -457,7 +436,6 @@
   }
   .skill-fill.animated { transform: scaleX(1); }
 
-  /* Skill categories */
   .skill-cats { display: flex; flex-direction: column; gap: 1rem; }
   .skill-cat {
     border: 1px solid var(--border);
@@ -475,7 +453,6 @@
     text-transform: uppercase;
     color: var(--cat-color);
     margin-bottom: 10px;
-    display: flex; align-items: center; gap: 6px;
   }
   .cat-items { display: flex; flex-wrap: wrap; gap: 6px; }
   .cat-item {
@@ -489,34 +466,96 @@
     letter-spacing: 0.3px;
   }
 
-  .cert-block {
-    margin-top: 1rem;
-    border: 1px solid rgba(217,119,6,0.2);
-    border-radius: 2px;
-    padding: 1.2rem 1.4rem;
-    background: rgba(217,119,6,0.03);
-  }
-  .cert-title {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 10px;
-  }
-  .cert-item {
-    font-family: 'Crimson Pro', serif;
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    padding: 4px 0;
-    display: flex; gap: 10px; align-items: flex-start;
-    border-bottom: 1px solid rgba(240,235,227,0.04);
-  }
-  .cert-item:last-child { border: none; }
-  .cert-item::before { content: '✦'; color: var(--amber); font-size: 0.7rem; margin-top: 4px; flex-shrink: 0; }
+  /* CERTIFICATIONS SECTION */
+  #certifications { background: var(--bg); }
 
-  /* ─── PROJECTS ─── */
-  #projects { background: var(--bg); }
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 4rem;
+  }
+
+  .cert-card {
+    background: var(--bg);
+    padding: 2rem 1.8rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    text-decoration: none;
+  }
+  .cert-card:hover { background: rgba(217,119,6,0.04); }
+  .cert-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--cert-color, var(--amber));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease;
+  }
+  .cert-card:hover::before { transform: scaleX(1); }
+
+  .cert-issuer {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cert-color, var(--amber));
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cert-issuer-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--cert-color, var(--amber));
+    flex-shrink: 0;
+  }
+  .cert-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+    line-height: 1.35;
+    flex: 1;
+  }
+  .cert-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+  }
+  .cert-verify {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cert-color, var(--amber));
+    opacity: 0.7;
+    transition: opacity 0.2s, letter-spacing 0.2s;
+  }
+  .cert-card:hover .cert-verify {
+    opacity: 1;
+    letter-spacing: 3px;
+  }
+  .cert-icon {
+    font-size: 1.4rem;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+  }
+  .cert-card:hover .cert-icon { opacity: 0.8; }
+
+  /* PROJECTS */
+  #projects { background: var(--bg-2); }
 
   .projects-grid {
     display: grid;
@@ -528,7 +567,7 @@
   }
 
   .project-card {
-    background: var(--bg);
+    background: var(--bg-2);
     padding: 2.5rem;
     position: relative;
     overflow: hidden;
@@ -572,6 +611,30 @@
     border-radius: 2px;
     align-self: flex-start;
   }
+  .project-badge-green {
+    display: inline-flex;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--green);
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.3);
+    padding: 4px 12px;
+    border-radius: 2px;
+    align-self: flex-start;
+  }
+  .project-badge-indigo {
+    display: inline-flex;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--indigo);
+    background: rgba(129,140,248,0.1);
+    border: 1px solid rgba(129,140,248,0.3);
+    padding: 4px 12px;
+    border-radius: 2px;
+    align-self: flex-start;
+  }
 
   .project-title {
     font-family: 'Playfair Display', serif;
@@ -606,8 +669,8 @@
   }
   .project-link:hover { letter-spacing: 3px; }
 
-  /* ─── EDUCATION ─── */
-  #education { background: var(--bg-2); }
+  /* EDUCATION */
+  #education { background: var(--bg); }
 
   .edu-grid {
     display: grid;
@@ -663,7 +726,7 @@
     margin-top: 2px;
   }
 
-  /* ─── FOOTER ─── */
+  /* FOOTER */
   footer {
     padding: 4rem 3rem;
     border-top: 1px solid var(--border);
@@ -681,9 +744,7 @@
     color: var(--amber);
     letter-spacing: -0.3px;
   }
-  .footer-contact {
-    display: flex; gap: 2rem; flex-wrap: wrap;
-  }
+  .footer-contact { display: flex; gap: 2rem; flex-wrap: wrap; }
   .footer-contact a {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -699,13 +760,12 @@
     color: var(--text-dim);
     letter-spacing: 1px;
     text-align: center;
-    margin-top: 2rem;
+    margin: 2rem auto 0;
     padding-top: 2rem;
     border-top: 1px solid var(--border);
-    max-width: 1200px; margin: 2rem auto 0;
+    max-width: 1200px;
   }
 
-  /* Responsive */
   @media (max-width: 900px) {
     section { padding: 5rem 1.5rem; }
     nav { padding: 1rem 1.5rem; }
@@ -718,17 +778,18 @@
     .skills-grid { grid-template-columns: 1fr; }
     .projects-grid { grid-template-columns: 1fr; }
     .edu-grid { grid-template-columns: 1fr; }
+    .certs-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 600px) {
     .impact-grid { grid-template-columns: 1fr; }
+    .certs-grid { grid-template-columns: 1fr; }
     .hero-name { letter-spacing: -2px; }
   }
 </style>
 </head>
 <body class="noise">
 
-<!-- Custom cursor -->
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursor-ring"></div>
 
@@ -739,6 +800,7 @@
     <a href="#impact">Impact</a>
     <a href="#experience">Experience</a>
     <a href="#skills">Skills</a>
+    <a href="#certifications">Certifications</a>
     <a href="#projects">Projects</a>
     <a href="#education">Education</a>
   </div>
@@ -763,8 +825,8 @@
     <div class="hero-bottom">
       <p class="hero-role">
         Building intelligent systems at the intersection of LLMs,<br>
-        real-time analytics & scalable data engineering —<br>
-        across disaster AI, IAM security & financial risk.
+        real-time analytics &amp; scalable data engineering —<br>
+        across disaster AI, IAM security, financial risk &amp; beyond.
       </p>
       <div class="hero-links">
         <a href="https://github.com/YOUR_GITHUB" target="_blank" class="hero-link">GitHub</a>
@@ -786,7 +848,6 @@
         Every metric below comes from production systems — not benchmarks. Real pipelines, real reductions, real results.
       </p>
     </div>
-
     <div class="impact-grid">
       <div class="stat-card reveal reveal-delay-1">
         <div class="stat-num" data-target="60" data-suffix="%">0%</div>
@@ -835,7 +896,7 @@
           <div class="exp-company">Interlinked</div>
           <div class="exp-role">Data Engineering Intern</div>
           <ul class="exp-highlights">
-            <li>Designing change detection & deduplication mechanisms for AI-driven disaster intelligence pipelines used by wildfire-prone public agencies.</li>
+            <li>Designing change detection &amp; deduplication mechanisms for AI-driven disaster intelligence pipelines used by wildfire-prone public agencies.</li>
             <li>Evolved data ingestion from static polling to dynamic event-driven triggers — reducing pipeline latency by 60%.</li>
             <li>Architecting agentic LangChain workflows to autonomously route, validate, and enrich disaster event data.</li>
             <li>Contributing to stream vs. batch processing architecture decisions for scalability in production.</li>
@@ -856,12 +917,12 @@
           <span class="exp-tag tag-ongoing">Ongoing</span>
         </div>
         <div class="exp-right">
-          <div class="exp-company">Tenaris / Texas A&M</div>
+          <div class="exp-company">Tenaris / Texas A&amp;M</div>
           <div class="exp-role">Data Scientist — Real-Time IAM Security</div>
           <ul class="exp-highlights">
             <li>Fine-tuned BERT-based LLMs and built HDBSCAN/K-Means clustering to classify IAM events across 100K+ daily logs.</li>
             <li>Built scalable real-time pipelines with PySpark, Airflow, Kafka, and AWS — cutting log latency by 40%.</li>
-            <li>Forecasted IAM threat patterns with LSTM & ARIMA on Spark, halving incident resolution time; visualized in Power BI.</li>
+            <li>Forecasted IAM threat patterns with LSTM &amp; ARIMA on Spark, halving incident resolution time; visualized in Power BI.</li>
           </ul>
           <div class="tech-chips">
             <span class="chip">BERT</span>
@@ -883,7 +944,7 @@
           <div class="exp-company">Deloitte Project</div>
           <div class="exp-role">ML Engineer Intern — Financial Risk</div>
           <ul class="exp-highlights">
-            <li>Built XGBoost, LightGBM, and ARIMA models for market volatility & credit risk — improving accuracy by 30%.</li>
+            <li>Built XGBoost, LightGBM, and ARIMA models for market volatility &amp; credit risk — improving accuracy by 30%.</li>
             <li>Automated real-time Airflow + Snowflake pipelines for risk analytics, reducing projected portfolio losses by 20%.</li>
           </ul>
           <div class="tech-chips">
@@ -909,66 +970,47 @@
     </div>
 
     <div class="skills-grid">
-      <!-- Bars -->
       <div class="reveal reveal-delay-1">
         <p style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:1.5rem;">Proficiency</p>
         <div class="skill-bars" id="skill-bars">
           <div class="skill-row">
-            <div class="skill-row-top">
-              <span class="skill-name">Python & ML (TF/PyTorch/sklearn)</span>
-              <span class="skill-pct">95%</span>
-            </div>
+            <div class="skill-row-top"><span class="skill-name">Python &amp; ML (TF/PyTorch/sklearn)</span><span class="skill-pct">95%</span></div>
             <div class="skill-track"><div class="skill-fill" style="width:95%;background:var(--green);--delay:0s;"></div></div>
           </div>
           <div class="skill-row">
-            <div class="skill-row-top">
-              <span class="skill-name">LLM / RAG (BERT, LangChain, FAISS)</span>
-              <span class="skill-pct">90%</span>
-            </div>
+            <div class="skill-row-top"><span class="skill-name">LLM / RAG (BERT, LangChain, FAISS)</span><span class="skill-pct">90%</span></div>
             <div class="skill-track"><div class="skill-fill" style="width:90%;background:var(--amber);--delay:0.1s;"></div></div>
           </div>
           <div class="skill-row">
-            <div class="skill-row-top">
-              <span class="skill-name">Data Engineering (Spark, Kafka, Airflow)</span>
-              <span class="skill-pct">88%</span>
-            </div>
+            <div class="skill-row-top"><span class="skill-name">Data Engineering (Spark, Kafka, Airflow)</span><span class="skill-pct">88%</span></div>
             <div class="skill-track"><div class="skill-fill" style="width:88%;background:var(--amber);--delay:0.2s;"></div></div>
           </div>
           <div class="skill-row">
-            <div class="skill-row-top">
-              <span class="skill-name">Time-Series (LSTM, ARIMA)</span>
-              <span class="skill-pct">85%</span>
-            </div>
+            <div class="skill-row-top"><span class="skill-name">Time-Series (LSTM, ARIMA)</span><span class="skill-pct">85%</span></div>
             <div class="skill-track"><div class="skill-fill" style="width:85%;background:var(--indigo);--delay:0.3s;"></div></div>
           </div>
           <div class="skill-row">
-            <div class="skill-row-top">
-              <span class="skill-name">Cloud (AWS, GCP)</span>
-              <span class="skill-pct">82%</span>
-            </div>
-            <div class="skill-track"><div class="skill-fill" style="width:82%;background:var(--indigo);--delay:0.4s;"></div></div>
+            <div class="skill-row-top"><span class="skill-name">Cloud (AWS, Azure, GCP)</span><span class="skill-pct">85%</span></div>
+            <div class="skill-track"><div class="skill-fill" style="width:85%;background:var(--indigo);--delay:0.4s;"></div></div>
           </div>
           <div class="skill-row">
-            <div class="skill-row-top">
-              <span class="skill-name">SQL & Databases</span>
-              <span class="skill-pct">88%</span>
-            </div>
+            <div class="skill-row-top"><span class="skill-name">SQL &amp; Databases</span><span class="skill-pct">88%</span></div>
             <div class="skill-track"><div class="skill-fill" style="width:88%;background:var(--pink);--delay:0.5s;"></div></div>
           </div>
           <div class="skill-row">
-            <div class="skill-row-top">
-              <span class="skill-name">Visualization (Power BI, matplotlib)</span>
-              <span class="skill-pct">80%</span>
-            </div>
+            <div class="skill-row-top"><span class="skill-name">Visualization (Power BI, matplotlib)</span><span class="skill-pct">80%</span></div>
             <div class="skill-track"><div class="skill-fill" style="width:80%;background:var(--pink);--delay:0.6s;"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span class="skill-name">Deep Learning (CNN, Hyperparameter Tuning)</span><span class="skill-pct">87%</span></div>
+            <div class="skill-track"><div class="skill-fill" style="width:87%;background:var(--teal);--delay:0.7s;"></div></div>
           </div>
         </div>
       </div>
 
-      <!-- Categories -->
       <div class="skill-cats reveal reveal-delay-2">
         <div class="skill-cat" style="--cat-color: var(--amber);">
-          <div class="skill-cat-name">Languages & ML</div>
+          <div class="skill-cat-name">Languages &amp; ML</div>
           <div class="cat-items">
             <span class="cat-item">Python</span><span class="cat-item">SQL</span><span class="cat-item">R</span>
             <span class="cat-item">Scikit-learn</span><span class="cat-item">TensorFlow</span>
@@ -976,7 +1018,7 @@
           </div>
         </div>
         <div class="skill-cat" style="--cat-color: var(--green);">
-          <div class="skill-cat-name">LLM & AI Frameworks</div>
+          <div class="skill-cat-name">LLM &amp; AI Frameworks</div>
           <div class="cat-items">
             <span class="cat-item">LangChain</span><span class="cat-item">LlamaIndex</span>
             <span class="cat-item">FAISS</span><span class="cat-item">BERT fine-tuning</span>
@@ -993,20 +1035,88 @@
           </div>
         </div>
         <div class="skill-cat" style="--cat-color: var(--pink);">
-          <div class="skill-cat-name">Cloud & Databases</div>
+          <div class="skill-cat-name">Cloud &amp; Databases</div>
           <div class="cat-items">
             <span class="cat-item">AWS (S3, Lambda, SageMaker)</span>
+            <span class="cat-item">Azure ML</span>
             <span class="cat-item">GCP BigQuery</span><span class="cat-item">MySQL</span>
             <span class="cat-item">PostgreSQL</span><span class="cat-item">MongoDB</span><span class="cat-item">Redshift</span>
           </div>
         </div>
-        <div class="cert-block">
-          <div class="cert-title">✦ Certifications</div>
-          <div class="cert-item">Microsoft Certified: Azure Data Scientist Associate</div>
-          <div class="cert-item">IBM Cloud Computing</div>
-          <div class="cert-item">IBM Data Analytics</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">Credentials</p>
+      <h2 class="section-title">Certifi<em>cations</em></h2>
+      <p style="font-family:'Crimson Pro',serif;font-size:1.05rem;color:var(--text-muted);max-width:540px;margin-top:0.5rem;line-height:1.7;">
+        Verified credentials from Microsoft, IBM, and DeepLearning.AI — spanning cloud architecture, mathematical foundations, and deep neural networks.
+      </p>
+    </div>
+
+    <div class="certs-grid">
+
+      <a href="https://learn.microsoft.com/en-us/users/venkatesnagineni-9123/credentials/54df218c9761841c" target="_blank" class="cert-card reveal reveal-delay-1" style="--cert-color: var(--teal);">
+        <div class="cert-issuer"><div class="cert-issuer-dot"></div>Microsoft</div>
+        <div class="cert-name">Azure Data Scientist Associate</div>
+        <div class="cert-footer">
+          <span class="cert-verify">Verify ↗</span>
+          <span class="cert-icon">☁</span>
+        </div>
+      </a>
+
+      <a href="https://www.coursera.org/account/accomplishments/verify/AS62BW924C9P" target="_blank" class="cert-card reveal reveal-delay-2" style="--cert-color: var(--amber);">
+        <div class="cert-issuer"><div class="cert-issuer-dot"></div>DeepLearning.AI</div>
+        <div class="cert-name">Improving Deep Neural Networks: Hyperparameter Tuning, Regularization &amp; Optimization</div>
+        <div class="cert-footer">
+          <span class="cert-verify">Verify ↗</span>
+          <span class="cert-icon">🧠</span>
+        </div>
+      </a>
+
+      <a href="https://www.coursera.org/account/accomplishments/verify/WVQKPR3Z392U" target="_blank" class="cert-card reveal reveal-delay-3" style="--cert-color: var(--indigo);">
+        <div class="cert-issuer"><div class="cert-issuer-dot"></div>IBM</div>
+        <div class="cert-name">Cloud Computing Fundamentals</div>
+        <div class="cert-footer">
+          <span class="cert-verify">Verify ↗</span>
+          <span class="cert-icon">☁</span>
+        </div>
+      </a>
+
+      <a href="https://www.coursera.org/account/accomplishments/verify/7WZMTT62LYDU" target="_blank" class="cert-card reveal reveal-delay-4" style="--cert-color: var(--green);">
+        <div class="cert-issuer"><div class="cert-issuer-dot"></div>DeepLearning.AI</div>
+        <div class="cert-name">Linear Algebra for Machine Learning &amp; Data Science</div>
+        <div class="cert-footer">
+          <span class="cert-verify">Verify ↗</span>
+          <span class="cert-icon">∑</span>
+        </div>
+      </a>
+
+      <a href="https://www.coursera.org/account/accomplishments/verify/CF7X5DK9U8QK" target="_blank" class="cert-card reveal reveal-delay-5" style="--cert-color: var(--pink);">
+        <div class="cert-issuer"><div class="cert-issuer-dot"></div>IBM</div>
+        <div class="cert-name">Exploratory Data Analysis for Machine Learning</div>
+        <div class="cert-footer">
+          <span class="cert-verify">Verify ↗</span>
+          <span class="cert-icon">📊</span>
+        </div>
+      </a>
+
+      <!-- placeholder for future certs -->
+      <div class="cert-card reveal reveal-delay-6" style="--cert-color: rgba(240,235,227,0.1); cursor: default; opacity: 0.4; border: 1px dashed rgba(240,235,227,0.1);">
+        <div class="cert-issuer" style="color:var(--text-dim);">
+          <div class="cert-issuer-dot" style="background:var(--text-dim);"></div>In Progress
+        </div>
+        <div class="cert-name" style="color:var(--text-dim);">Next Certification</div>
+        <div class="cert-footer">
+          <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:2px;">Coming soon</span>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -1022,9 +1132,9 @@
 
       <div class="project-card reveal reveal-delay-1">
         <div class="project-num">01</div>
-        <div class="project-period">Texas A&M Capstone</div>
+        <div class="project-period">Texas A&amp;M Capstone</div>
         <div class="project-title">AgriChat — RAG Chatbot</div>
-        <p class="project-desc">RAG chatbot querying Cotton RACE trial data using Groq-hosted Llama-3.3-70B, LlamaIndex orchestration, and FAISS vector retrieval (BAAI/bge-small-en-v1.5). Live on Streamlit.</p>
+        <p class="project-desc">Production RAG chatbot querying Cotton RACE trial datasets using Groq-hosted Llama-3.3-70B, LlamaIndex orchestration, and FAISS vector retrieval (BAAI/bge-small-en-v1.5). Deployed live on Streamlit — enabling researchers to query 10+ years of agricultural data in natural language.</p>
         <div class="project-footer">
           <div class="tech-chips">
             <span class="chip">Llama-3.3-70B</span>
@@ -1040,7 +1150,7 @@
         <div class="project-num">02</div>
         <span class="project-badge">🏆 Best Paper Award</span>
         <div class="project-title">DeepFake Detection — Dense CNN</div>
-        <p class="project-desc">Novel deepfake detection pipeline that won Best Paper Award at an International Conference and was published as a Springer book chapter. Reduced image processing time by 30%.</p>
+        <p class="project-desc">Novel deepfake detection pipeline published as a Springer book chapter after winning Best Paper Award at an International Conference. Achieved 30% faster image processing than baseline approaches through a custom Dense CNN architecture with optimized feature extraction.</p>
         <div class="project-footer">
           <div class="tech-chips">
             <span class="chip">TensorFlow</span>
@@ -1054,8 +1164,8 @@
       <div class="project-card reveal reveal-delay-3">
         <div class="project-num">03</div>
         <span class="project-badge">🥈 2nd / 300+ Teams</span>
-        <div class="project-title">Customer Segmentation Model</div>
-        <p class="project-desc">Predictive analytics pipeline using clustering & classification for customer segmentation. Placed 2nd among 300+ participants at HackerEarth Hackathon.</p>
+        <div class="project-title">Customer Segmentation — Hackathon</div>
+        <p class="project-desc">End-to-end predictive analytics pipeline combining K-Means clustering with XGBoost classification for customer segmentation. Placed 2nd among 300+ participants at the HackerEarth ML Hackathon through feature engineering and ensemble stacking.</p>
         <div class="project-footer">
           <div class="tech-chips">
             <span class="chip">Scikit-learn</span>
@@ -1069,12 +1179,75 @@
         <div class="project-num">04</div>
         <div class="project-period">Oct 2023</div>
         <div class="project-title">Image Synthesis: VQGAN + CLIP</div>
-        <p class="project-desc">Text-to-image synthesis system demonstrating generative capabilities by combining VQGAN latent space with CLIP-guided optimization for creative content generation.</p>
+        <p class="project-desc">Text-to-image synthesis system combining VQGAN's discrete latent space with CLIP-guided gradient optimization. Demonstrates deep understanding of generative model architectures and multimodal learning — bridging vision transformers and language-image embeddings.</p>
         <div class="project-footer">
           <div class="tech-chips">
             <span class="chip">PyTorch</span>
             <span class="chip">VQGAN</span>
             <span class="chip">CLIP</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-5">
+        <div class="project-num">05</div>
+        <span class="project-badge-green">End-to-End ML Pipeline</span>
+        <div class="project-title">Real-Time Fraud Detection System</div>
+        <p class="project-desc">Streaming fraud detection pipeline ingesting 50K+ transactions per minute via Kafka, scored by an ensemble of Isolation Forest + XGBoost with sub-100ms latency. Features automated model retraining via Airflow DAGs when drift is detected — achieving 97.3% precision on imbalanced card transaction data.</p>
+        <div class="project-footer">
+          <div class="tech-chips">
+            <span class="chip">Kafka</span>
+            <span class="chip">XGBoost</span>
+            <span class="chip">Isolation Forest</span>
+            <span class="chip">Airflow</span>
+            <span class="chip">PySpark</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-6">
+        <div class="project-num">06</div>
+        <span class="project-badge-indigo">MLOps · Azure</span>
+        <div class="project-title">MLOps Pipeline — Azure ML</div>
+        <p class="project-desc">End-to-end MLOps platform on Azure ML Studio with automated CI/CD model training, versioning, and deployment. Implements A/B testing, drift detection, and rollback logic — reducing model deployment time from days to under 2 hours. Directly applies the Azure Data Scientist Associate credential in a production context.</p>
+        <div class="project-footer">
+          <div class="tech-chips">
+            <span class="chip">Azure ML</span>
+            <span class="chip">MLflow</span>
+            <span class="chip">Docker</span>
+            <span class="chip">GitHub Actions</span>
+            <span class="chip">Python</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-7">
+        <div class="project-num">07</div>
+        <span class="project-badge-green">NLP · Transformers</span>
+        <div class="project-title">Multi-Document Summarization with Fine-Tuned T5</div>
+        <p class="project-desc">Fine-tuned T5-base on a multi-document news summarization corpus using QLoRA for parameter-efficient training. Achieved a 4.1 ROUGE-L improvement over baseline by incorporating contrastive learning to reduce hallucinations. Demonstrates mastery of PEFT techniques central to production LLM workflows.</p>
+        <div class="project-footer">
+          <div class="tech-chips">
+            <span class="chip">T5</span>
+            <span class="chip">QLoRA</span>
+            <span class="chip">HuggingFace</span>
+            <span class="chip">PyTorch</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-8">
+        <div class="project-num">08</div>
+        <span class="project-badge">📊 Data Engineering</span>
+        <div class="project-title">Spotify Listening Analytics — EDA &amp; Dashboard</div>
+        <p class="project-desc">Full exploratory data analysis pipeline on 500K+ Spotify streaming records — applying statistical hypothesis testing, correlation analysis, and clustering to uncover listening behavior patterns. Built an interactive Power BI dashboard with time-series seasonality decomposition, directly applying the IBM EDA for ML certification concepts.</p>
+        <div class="project-footer">
+          <div class="tech-chips">
+            <span class="chip">Python</span>
+            <span class="chip">Pandas</span>
+            <span class="chip">Power BI</span>
+            <span class="chip">Seaborn</span>
+            <span class="chip">SciPy</span>
           </div>
         </div>
       </div>
@@ -1092,7 +1265,7 @@
     </div>
     <div class="edu-grid">
       <div class="edu-card reveal reveal-delay-1" style="--edu-color: var(--amber);">
-        <div class="edu-school">Texas A&M University</div>
+        <div class="edu-school">Texas A&amp;M University</div>
         <div class="edu-degree">M.S. Data Science</div>
         <div class="edu-period">Aug 2024 – May 2026</div>
         <div class="edu-gpa">3.6</div>
@@ -1100,7 +1273,7 @@
       </div>
       <div class="edu-card reveal reveal-delay-2" style="--edu-color: var(--indigo);">
         <div class="edu-school">SRM University</div>
-        <div class="edu-degree">B.Tech CS — AI & ML Specialization</div>
+        <div class="edu-degree">B.Tech CS — AI &amp; ML Specialization</div>
         <div class="edu-period">Oct 2020 – May 2024</div>
         <div class="edu-gpa">9.6</div>
         <div class="edu-gpa-label">GPA / 10.0</div>
@@ -1120,7 +1293,7 @@
       <a href="https://github.com/YOUR_GITHUB" target="_blank">GitHub</a>
     </div>
   </div>
-  <div class="footer-copy">© 2026 Venkateswarlu Nagineni · College Station, TX</div>
+  <div class="footer-copy">© 2026 Venkateswarlu Nagineni · College Station, TX · MS Data Science, Texas A&amp;M</div>
 </footer>
 
 <script>
@@ -1147,13 +1320,11 @@
   document.querySelectorAll('a, button').forEach(el => {
     el.addEventListener('mouseenter', () => {
       cursor.style.transform = 'translate(-50%, -50%) scale(2)';
-      ring.style.width = '60px';
-      ring.style.height = '60px';
+      ring.style.width = '60px'; ring.style.height = '60px';
     });
     el.addEventListener('mouseleave', () => {
       cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-      ring.style.width = '36px';
-      ring.style.height = '36px';
+      ring.style.width = '36px'; ring.style.height = '36px';
     });
   });
 
@@ -1166,21 +1337,18 @@
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
-    });
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   reveals.forEach(r => observer.observe(r));
 
-  // Count-up for stat numbers
+  // Count-up
   function countUp(el, target, suffix, duration = 1800) {
     let start = null;
     const step = ts => {
       if (!start) start = ts;
       const progress = Math.min((ts - start) / duration, 1);
       const ease = 1 - Math.pow(1 - progress, 3);
-      const val = Math.round(ease * target);
-      el.textContent = val + suffix;
+      el.textContent = Math.round(ease * target) + suffix;
       if (progress < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
@@ -1190,16 +1358,14 @@
     entries.forEach(e => {
       if (e.isIntersecting) {
         const el = e.target;
-        const target = parseInt(el.dataset.target);
-        const suffix = el.dataset.suffix;
-        countUp(el, target, suffix);
+        countUp(el, parseInt(el.dataset.target), el.dataset.suffix);
         statObserver.unobserve(el);
       }
     });
   }, { threshold: 0.3 });
   document.querySelectorAll('.stat-num[data-target]').forEach(el => statObserver.observe(el));
 
-  // Skill bar animation
+  // Skill bars
   const skillObserver = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
