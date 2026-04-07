@@ -1,1113 +1,443 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Venkateswarlu Nagineni — Data Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #000;
-      --surface: #0a0a0a;
-      --surface2: #111;
-      --border: rgba(255,255,255,0.08);
-      --text: #f5f5f7;
-      --text-secondary: #a1a1a6;
-      --text-tertiary: #6e6e73;
-      --accent: #2997ff;
-      --accent2: #30d158;
-      --accent3: #ff375f;
-      --gradient1: linear-gradient(135deg, #2997ff 0%, #30d158 100%);
-      --gradient2: linear-gradient(135deg, #bf5af2 0%, #2997ff 100%);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Mona Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px;
-      height: 52px;
-      background: rgba(0,0,0,0.72);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-size: 17px;
-      font-weight: 600;
-      letter-spacing: -0.5px;
-      color: var(--text);
-    }
-    .nav-links {
-      display: flex; gap: 32px; list-style: none;
-    }
-    .nav-links a {
-      font-size: 13px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.2s;
-      letter-spacing: 0.01em;
-    }
-    .nav-links a:hover { color: var(--text); }
-
-    .nav-cta {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--accent);
-      text-decoration: none;
-      padding: 6px 14px;
-      border: 1px solid rgba(41,151,255,0.35);
-      border-radius: 20px;
-      transition: all 0.25s;
-    }
-    .nav-cta:hover {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    /* ── NAV AVATAR ── */
-    .nav-avatar {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 2px solid rgba(255,255,255,0.15);
-      flex-shrink: 0;
-      transition: border-color 0.25s, transform 0.25s;
-      cursor: pointer;
-    }
-    .nav-avatar:hover {
-      border-color: var(--accent);
-      transform: scale(1.08);
-    }
-    .nav-avatar img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* ── HERO AVATAR ── */
-    .hero-avatar-wrap {
-      position: relative;
-      width: 120px; height: 120px;
-      margin: 0 auto 28px;
-      animation: fadeUp 0.8s ease both;
-    }
-    .hero-avatar-ring {
-      position: absolute; inset: -4px;
-      border-radius: 50%;
-      background: conic-gradient(from 0deg, #2997ff, #30d158, #bf5af2, #2997ff);
-      animation: spin 6s linear infinite;
-      z-index: 0;
-    }
-    .hero-avatar-bg {
-      position: absolute; inset: 2px;
-      border-radius: 50%;
-      background: var(--bg);
-      z-index: 1;
-    }
-    .hero-avatar {
-      position: absolute; inset: 5px;
-      border-radius: 50%;
-      overflow: hidden;
-      z-index: 2;
-    }
-    .hero-avatar img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    /* fallback initials */
-    .avatar-initials {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
-      font-size: 32px; font-weight: 700;
-      color: var(--text);
-      letter-spacing: -1px;
-      font-family: 'Mona Sans', sans-serif;
-    }
-    .nav-avatar-initials {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
-      font-size: 12px; font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.5px;
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: 120px 24px 80px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-bg {
-      position: absolute; inset: 0; z-index: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(41,151,255,0.12) 0%, transparent 70%),
-                  radial-gradient(ellipse 60% 40% at 80% 80%, rgba(48,209,88,0.07) 0%, transparent 60%),
-                  radial-gradient(ellipse 50% 50% at 20% 60%, rgba(191,90,242,0.07) 0%, transparent 60%);
-    }
-
-    .hero-noise {
-      position: absolute; inset: 0; z-index: 0;
-      opacity: 0.025;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-size: 128px;
-    }
-
-    .hero-content { position: relative; z-index: 1; max-width: 800px; }
-
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--accent);
-      background: rgba(41,151,255,0.1);
-      border: 1px solid rgba(41,151,255,0.2);
-      padding: 6px 16px;
-      border-radius: 20px;
-      margin-bottom: 32px;
-      letter-spacing: 0.02em;
-      animation: fadeUp 0.8s ease both;
-    }
-    .hero-badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent2);
-      animation: pulse 2s ease infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
-
-    .hero h1 {
-      font-size: clamp(48px, 8vw, 96px);
-      font-weight: 700;
-      letter-spacing: -3px;
-      line-height: 1.0;
-      margin-bottom: 24px;
-      animation: fadeUp 0.8s 0.1s ease both;
-    }
-
-    .hero h1 .gradient-text {
-      background: var(--gradient1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-sub {
-      font-size: clamp(18px, 2.5vw, 22px);
-      font-weight: 300;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      max-width: 560px;
-      margin: 0 auto 40px;
-      animation: fadeUp 0.8s 0.2s ease both;
-      letter-spacing: -0.3px;
-    }
-
-    .hero-actions {
-      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
-      animation: fadeUp 0.8s 0.3s ease both;
-    }
-
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 15px; font-weight: 500;
-      color: #fff;
-      background: var(--accent);
-      padding: 13px 28px;
-      border-radius: 980px;
-      text-decoration: none;
-      transition: all 0.25s;
-      letter-spacing: -0.2px;
-    }
-    .btn-primary:hover { background: #0a84ff; transform: translateY(-1px); box-shadow: 0 8px 32px rgba(41,151,255,0.35); }
-
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 15px; font-weight: 500;
-      color: var(--accent);
-      background: rgba(41,151,255,0.08);
-      border: 1px solid rgba(41,151,255,0.2);
-      padding: 13px 28px;
-      border-radius: 980px;
-      text-decoration: none;
-      transition: all 0.25s;
-      letter-spacing: -0.2px;
-    }
-    .btn-secondary:hover { background: rgba(41,151,255,0.15); transform: translateY(-1px); }
-
-    .hero-stats {
-      display: flex; gap: 48px; justify-content: center; flex-wrap: wrap;
-      margin-top: 72px;
-      animation: fadeUp 0.8s 0.4s ease both;
-    }
-    .stat { text-align: center; }
-    .stat-value {
-      font-size: 36px; font-weight: 700; letter-spacing: -1.5px;
-      background: var(--gradient1);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .stat-label { font-size: 13px; color: var(--text-tertiary); margin-top: 4px; letter-spacing: 0.02em; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── SECTIONS ── */
-    section {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 100px 24px;
-    }
-
-    .section-label {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 700;
-      letter-spacing: -1.5px;
-      line-height: 1.1;
-      margin-bottom: 16px;
-    }
-
-    .section-desc {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.65;
-      max-width: 560px;
-      font-weight: 300;
-    }
-
-    /* ── DIVIDER ── */
-    .divider {
-      width: 100%; height: 1px;
-      background: var(--border);
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-
-    /* ── EXPERIENCE ── */
-    .exp-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 56px;
-    }
-
-    .exp-card {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .exp-card::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 80% at 50% 0%, rgba(41,151,255,0.06), transparent 70%);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-    .exp-card:hover { border-color: rgba(41,151,255,0.25); transform: translateY(-2px); }
-    .exp-card:hover::before { opacity: 1; }
-
-    .exp-card.featured {
-      grid-column: 1 / -1;
-      background: linear-gradient(135deg, rgba(41,151,255,0.05) 0%, rgba(48,209,88,0.03) 100%);
-      border-color: rgba(41,151,255,0.15);
-    }
-
-    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
-
-    .exp-company {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: rgba(41,151,255,0.1);
-      border: 1px solid rgba(41,151,255,0.15);
-      padding: 4px 10px;
-      border-radius: 8px;
-    }
-
-    .exp-date {
-      font-size: 13px;
-      color: var(--text-tertiary);
-    }
-
-    .exp-role {
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
-    }
-
-    .exp-location {
-      font-size: 13px;
-      color: var(--text-tertiary);
-      margin-bottom: 20px;
-      display: flex; align-items: center; gap: 4px;
-    }
-
-    .exp-bullets {
-      list-style: none;
-      display: flex; flex-direction: column; gap: 12px;
-    }
-
-    .exp-bullets li {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      padding-left: 18px;
-      position: relative;
-    }
-
-    .exp-bullets li::before {
-      content: '→';
-      position: absolute; left: 0;
-      color: var(--accent);
-      font-size: 12px;
-    }
-
-    .exp-tag {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--accent2);
-      background: rgba(48,209,88,0.08);
-      border: 1px solid rgba(48,209,88,0.15);
-      padding: 3px 9px;
-      border-radius: 6px;
-      margin-right: 6px; margin-top: 6px;
-    }
-
-    /* ── SKILLS ── */
-    .skills-section { background: var(--surface); }
-
-    .skills-wrapper {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-top: 56px;
-    }
-
-    .skill-group {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .skill-group:hover { border-color: rgba(41,151,255,0.2); transform: translateY(-2px); }
-
-    .skill-group-icon {
-      font-size: 28px;
-      margin-bottom: 16px;
-    }
-
-    .skill-group-title {
-      font-size: 17px;
-      font-weight: 600;
-      letter-spacing: -0.3px;
-      margin-bottom: 16px;
-    }
-
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-
-    .skill-tag {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text-secondary);
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      padding: 5px 12px;
-      border-radius: 8px;
-      transition: all 0.2s;
-    }
-    .skill-tag:hover { color: var(--text); border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); }
-
-    /* ── PROJECTS ── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
-      margin-top: 56px;
-    }
-
-    .project-card {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-card::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--gradient1);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .project-card:hover { border-color: rgba(255,255,255,0.12); transform: translateY(-3px); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
-    .project-card:hover::after { opacity: 1; }
-
-    .project-year {
-      font-size: 12px;
-      color: var(--text-tertiary);
-      margin-bottom: 12px;
-    }
-
-    .project-title {
-      font-size: 19px;
-      font-weight: 600;
-      letter-spacing: -0.4px;
-      margin-bottom: 12px;
-      line-height: 1.3;
-    }
-
-    .project-desc {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .project-award {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 12px; font-weight: 500;
-      color: #ffd60a;
-      background: rgba(255,214,10,0.08);
-      border: 1px solid rgba(255,214,10,0.2);
-      padding: 4px 10px;
-      border-radius: 8px;
-    }
-
-    /* ── EDUCATION ── */
-    .edu-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 56px;
-    }
-
-    .edu-card {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .edu-card:hover { border-color: rgba(191,90,242,0.25); transform: translateY(-2px); }
-
-    .edu-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(ellipse 60% 60% at 50% -10%, rgba(191,90,242,0.06), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .edu-card:hover::before { opacity: 1; }
-
-    .edu-badge {
-      font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-      color: #bf5af2;
-      background: rgba(191,90,242,0.1);
-      border: 1px solid rgba(191,90,242,0.2);
-      padding: 4px 10px;
-      border-radius: 8px;
-      display: inline-block;
-      margin-bottom: 20px;
-    }
-
-    .edu-school { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px; }
-    .edu-degree { font-size: 15px; color: var(--text-secondary); margin-bottom: 4px; }
-    .edu-meta { font-size: 13px; color: var(--text-tertiary); margin-bottom: 20px; }
-
-    .edu-gpa {
-      font-size: 30px; font-weight: 700; letter-spacing: -1px;
-      background: var(--gradient2);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .edu-gpa-label { font-size: 12px; color: var(--text-tertiary); margin-top: 2px; }
-
-    /* ── CERTS ── */
-    .certs-row {
-      display: flex; gap: 16px; flex-wrap: wrap;
-      margin-top: 56px;
-    }
-
-    .cert-card {
-      flex: 1; min-width: 220px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      transition: all 0.3s;
-      display: flex; align-items: center; gap: 16px;
-    }
-    .cert-card:hover { border-color: rgba(48,209,88,0.25); transform: translateY(-2px); }
-
-    .cert-icon {
-      width: 44px; height: 44px;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-
-    .cert-icon.azure { background: rgba(0,120,212,0.15); }
-    .cert-icon.ibm { background: rgba(41,151,255,0.1); }
-
-    .cert-name { font-size: 14px; font-weight: 600; letter-spacing: -0.2px; margin-bottom: 4px; }
-    .cert-id { font-size: 11px; color: var(--text-tertiary); font-family: 'SF Mono', monospace; }
-
-    /* ── CONTACT / FOOTER ── */
-    .contact-section {
-      text-align: center;
-      padding: 120px 24px;
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-
-    .contact-card {
-      background: linear-gradient(135deg, rgba(41,151,255,0.06) 0%, rgba(48,209,88,0.04) 100%);
-      border: 1px solid rgba(41,151,255,0.15);
-      border-radius: 28px;
-      padding: 64px 48px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .contact-card::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(41,151,255,0.08), transparent 70%);
-    }
-
-    .contact-card > * { position: relative; z-index: 1; }
-
-    .contact-title {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 700; letter-spacing: -1.5px;
-      margin-bottom: 16px;
-    }
-
-    .contact-sub {
-      font-size: 17px; color: var(--text-secondary); font-weight: 300;
-      margin-bottom: 40px;
-    }
-
-    .contact-links {
-      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
-    }
-
-    .contact-link {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 15px; font-weight: 500;
-      color: var(--text-secondary);
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      padding: 13px 24px;
-      border-radius: 980px;
-      text-decoration: none;
-      transition: all 0.25s;
-    }
-    .contact-link:hover { color: var(--text); border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); transform: translateY(-1px); }
-
-    footer {
-      border-top: 1px solid var(--border);
-      text-align: center;
-      padding: 24px;
-      font-size: 13px;
-      color: var(--text-tertiary);
-    }
-
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .js-reveal-ready .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    .js-reveal-ready .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; }
-      .nav-links { display: none; }
-      .exp-grid, .edu-grid { grid-template-columns: 1fr; }
-      .exp-card.featured { grid-column: 1; }
-      .hero-stats { gap: 32px; }
-      .contact-card { padding: 40px 24px; }
-    }
-
-    /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 4px; }
-
-    /* ── SECTION BACKGROUNDS ── */
-    .alt-bg { background: var(--surface); }
-
-    .full-alt {
-      background: var(--surface);
-      padding: 100px 0;
-    }
-    .full-alt > section { padding-top: 0; padding-bottom: 0; }
-  </style>
-</head>
-<body>
-
-  <!-- NAV -->
-  <nav>
-    <span class="nav-logo">Venkates<span style="color:var(--text-secondary)">.</span></span>
-    <ul class="nav-links">
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div style="display:flex;align-items:center;gap:14px">
-      <a href="mailto:naginenivenkates@gmail.com" class="nav-cta">Get in touch</a>
-      <div class="nav-avatar" title="Venkateswarlu Nagineni" onclick="document.getElementById('hero-section').scrollIntoView({behavior:'smooth'})">
-        <!-- Replace src below with your photo URL or relative path e.g. src="profile.jpg" -->
-        <img id="nav-img" src="" alt="VN" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="nav-avatar-initials" style="display:none">VN</div>
+import { useState, useEffect, useRef } from "react";
+import {
+  RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Cell
+} from "recharts";
+import { Github, Linkedin, Mail, ExternalLink, ChevronDown, MapPin, Award } from "lucide-react";
+
+const AMBER = "#D97706";
+const AMBER_LIGHT = "#FCD34D";
+const AMBER_DIM = "#92400E";
+
+function useCountUp(target, duration = 1800, start = false) {
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    if (!start) return;
+    let startTime = null;
+    const step = (ts) => {
+      if (!startTime) startTime = ts;
+      const progress = Math.min((ts - startTime) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      setVal(Math.round(ease * target));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [target, duration, start]);
+  return val;
+}
+
+function StatCard({ value, suffix, label, started }) {
+  const count = useCountUp(value, 1600, started);
+  return (
+    <div style={{
+      background: "rgba(255,255,255,0.04)", border: "1px solid rgba(217,119,6,0.25)",
+      borderRadius: 12, padding: "1.5rem 1rem", textAlign: "center"
+    }}>
+      <div style={{ fontSize: 42, fontWeight: 700, color: AMBER, fontFamily: "Georgia,serif", lineHeight: 1 }}>
+        {count}{suffix}
       </div>
+      <div style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", marginTop: 8, lineHeight: 1.5 }}>{label}</div>
     </div>
-  </nav>
+  );
+}
 
-  <!-- HERO -->
-  <div class="hero" id="hero-section">
-    <div class="hero-bg"></div>
-    <div class="hero-noise"></div>
-    <div class="hero-content">
-      <!-- Profile Avatar -->
-      <div class="hero-avatar-wrap">
-        <div class="hero-avatar-ring"></div>
-        <div class="hero-avatar-bg"></div>
-        <div class="hero-avatar">
-          <!-- Replace src with your photo URL or relative path e.g. src="profile.jpg" -->
-          <img id="hero-img" src="" alt="Venkateswarlu Nagineni" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-          <div class="avatar-initials" style="display:none">VN</div>
-        </div>
+function useVisible(ref) {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.2 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+  return visible;
+}
+
+const impactMetrics = [
+  { value: 60, suffix: "%", label: "Pipeline latency cut\n(Interlinked)" },
+  { value: 50, suffix: "%", label: "Incident resolution\ntime reduced (Tenaris)" },
+  { value: 40, suffix: "%", label: "Log processing\nlatency reduced (Tenaris)" },
+  { value: 30, suffix: "%", label: "Prediction accuracy\nimproved (Deloitte)" },
+  { value: 20, suffix: "%", label: "Portfolio loss\nreduction (Deloitte)" },
+  { value: 100, suffix: "K+", label: "Daily IAM logs\nprocessed" },
+];
+
+const experience = [
+  {
+    company: "Interlinked",
+    role: "Data Engineering Intern",
+    period: "Mar 2026 – Jun 2026",
+    location: "Remote",
+    color: "#059669",
+    tag: "Current",
+    highlights: [
+      "Designing change detection & deduplication mechanisms for AI-driven disaster intelligence pipelines used by wildfire-prone public agencies.",
+      "Evolved data ingestion from static polling to dynamic event-driven triggers — reducing pipeline latency by 60%.",
+      "Architecting agentic LangChain workflows to autonomously route, validate, and enrich disaster event data.",
+      "Contributing to stream vs. batch processing architecture decisions for scalability in production.",
+    ],
+    tech: ["LangChain", "Event-Driven", "Python", "Stream Processing"],
+  },
+  {
+    company: "Tenaris / Texas A&M",
+    role: "Data Scientist — Real-Time IAM Security",
+    period: "Oct 2024 – Present",
+    location: "College Station, TX",
+    color: AMBER,
+    tag: "Ongoing",
+    highlights: [
+      "Fine-tuned BERT-based LLMs and built HDBSCAN/K-Means clustering to classify IAM events across 100K+ daily logs.",
+      "Built scalable real-time pipelines with PySpark, Airflow, Kafka, and AWS — cutting log latency by 40%.",
+      "Forecasted IAM threat patterns with LSTM & ARIMA on Spark, halving incident resolution time; visualized in Power BI.",
+    ],
+    tech: ["BERT", "HDBSCAN", "PySpark", "Kafka", "LSTM", "AWS"],
+  },
+  {
+    company: "Deloitte Project",
+    role: "ML Engineer Intern — Financial Risk",
+    period: "Nov 2023 – Aug 2024",
+    location: "Chennai, India",
+    color: "#6366F1",
+    tag: null,
+    highlights: [
+      "Built XGBoost, LightGBM, and ARIMA models for market volatility & credit risk — improving accuracy by 30%.",
+      "Automated real-time Airflow + Snowflake pipelines for risk analytics, reducing projected portfolio losses by 20%.",
+    ],
+    tech: ["XGBoost", "LightGBM", "ARIMA", "Snowflake", "Airflow"],
+  },
+];
+
+const skillData = [
+  { skill: "Python & ML (TF/PyTorch/sklearn)", score: 95 },
+  { skill: "LLM / RAG (BERT, LangChain, FAISS)", score: 90 },
+  { skill: "Data Engineering (Spark, Kafka, Airflow)", score: 88 },
+  { skill: "Cloud (AWS, GCP)", score: 82 },
+  { skill: "SQL & Databases", score: 88 },
+  { skill: "Visualization (Power BI, matplotlib)", score: 80 },
+  { skill: "Time-Series (LSTM, ARIMA)", score: 85 },
+];
+
+const projects = [
+  {
+    title: "AgriChat — RAG Chatbot",
+    period: "Texas A&M Capstone",
+    description: "RAG chatbot querying Cotton RACE trial data using Groq-hosted Llama-3.3-70B, LlamaIndex orchestration, and FAISS vector retrieval (BAAI/bge-small-en-v1.5). Live on Streamlit.",
+    tech: ["Llama-3.3-70B", "LlamaIndex", "FAISS", "Streamlit"],
+    link: "https://tamuagrichat.streamlit.app",
+    badge: null,
+  },
+  {
+    title: "DeepFake Detection — Dense CNN",
+    period: "SRM University · Springer Publication",
+    description: "Novel deepfake detection pipeline that won Best Paper Award at an International Conference and was published as a Springer book chapter. Reduced image processing time by 30%.",
+    tech: ["TensorFlow", "Dense CNN", "Computer Vision"],
+    link: null,
+    badge: "🏆 Best Paper Award",
+  },
+  {
+    title: "Customer Segmentation Model",
+    period: "HackerEarth Hackathon",
+    description: "Predictive analytics pipeline using clustering & classification for customer segmentation. Placed 2nd among 300+ participants.",
+    tech: ["Scikit-learn", "K-Means", "XGBoost"],
+    link: null,
+    badge: "🥈 2nd Place / 300+ teams",
+  },
+  {
+    title: "Image Synthesis: VQGAN + CLIP",
+    period: "Oct 2023",
+    description: "Text-to-image synthesis system demonstrating generative capabilities by combining VQGAN latent space with CLIP-guided optimization.",
+    tech: ["PyTorch", "VQGAN", "CLIP"],
+    link: null,
+    badge: null,
+  },
+];
+
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload?.length) {
+    return (
+      <div style={{ background: "#1F2937", border: "1px solid #374151", borderRadius: 8, padding: "8px 14px", fontSize: 13, color: "#FCD34D" }}>
+        {payload[0].payload.skill}: <strong>{payload[0].value}%</strong>
       </div>
+    );
+  }
+  return null;
+};
 
-      <div class="hero-badge">Available for Opportunities</div>
-      <h1>
-        <span class="gradient-text">Data Engineer</span><br>
-        & ML Specialist
-      </h1>
-      <p class="hero-sub">
-        Building scalable data pipelines and intelligent systems that turn raw data into real-world impact. MS Data Science @ Texas A&amp;M.
-      </p>
-      <div class="hero-actions">
-        <a href="#experience" class="btn-primary">
-          View Experience ↓
-        </a>
-        <a href="mailto:naginenivenkates@gmail.com" class="btn-secondary">
-          naginenivenkates@gmail.com
-        </a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-value">2+</div>
-          <div class="stat-label">Years Experience</div>
+export default function Portfolio() {
+  const [scrollY, setScrollY] = useState(0);
+  const statsRef = useRef(null);
+  const statsVisible = useVisible(statsRef);
+
+  useEffect(() => {
+    const h = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", h);
+    return () => window.removeEventListener("scroll", h);
+  }, []);
+
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
+  const navItems = ["About", "Impact", "Experience", "Skills", "Projects", "Education"];
+
+  return (
+    <div style={{ fontFamily: "system-ui,-apple-system,sans-serif", background: "#0B0F17", color: "#E5E7EB", minHeight: "100vh" }}>
+      {/* Nav */}
+      <nav style={{
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+        background: scrollY > 60 ? "rgba(11,15,23,0.95)" : "transparent",
+        backdropFilter: scrollY > 60 ? "blur(12px)" : "none",
+        borderBottom: scrollY > 60 ? "1px solid rgba(217,119,6,0.15)" : "none",
+        transition: "all 0.3s", padding: "1rem 2rem",
+        display: "flex", justifyContent: "space-between", alignItems: "center"
+      }}>
+        <span style={{ fontFamily: "Georgia,serif", color: AMBER, fontWeight: 700, fontSize: 18, letterSpacing: 1 }}>VN</span>
+        <div style={{ display: "flex", gap: 28 }}>
+          {navItems.map(n => (
+            <button key={n} onClick={() => scrollTo(n.toLowerCase())}
+              style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.6)", fontSize: 13, letterSpacing: 0.5, padding: 0, transition: "color 0.2s" }}
+              onMouseEnter={e => e.target.style.color = AMBER_LIGHT}
+              onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.6)"}
+            >{n}</button>
+          ))}
         </div>
-        <div class="stat">
-          <div class="stat-value">40%</div>
-          <div class="stat-label">Latency Reduction</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">100K+</div>
-          <div class="stat-label">Daily Logs Processed</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">3.6</div>
-          <div class="stat-label">GPA (MS TAMU)</div>
-        </div>
-      </div>
-    </div>
-  </div>
+      </nav>
 
-  <div class="divider"></div>
+      {/* Hero */}
+      <section id="about" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", padding: "0 2rem", textAlign: "center", overflow: "hidden" }}>
+        {/* Grid bg */}
+        <div style={{
+          position: "absolute", inset: 0,
+          backgroundImage: `linear-gradient(rgba(217,119,6,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(217,119,6,0.06) 1px, transparent 1px)`,
+          backgroundSize: "60px 60px",
+          transform: `translateY(${scrollY * 0.3}px)`
+        }} />
+        <div style={{ position: "absolute", top: "30%", left: "50%", transform: "translate(-50%,-50%)", width: 500, height: 500, background: "radial-gradient(circle, rgba(217,119,6,0.08) 0%, transparent 70%)", borderRadius: "50%" }} />
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="reveal">
-      <div class="section-label">Career</div>
-      <h2 class="section-title">Work Experience</h2>
-      <p class="section-desc">Building real-time data systems, ML pipelines, and cloud infrastructure at the intersection of engineering and data science.</p>
-    </div>
-
-    <div class="exp-grid">
-
-      <div class="exp-card featured reveal">
-        <div class="exp-header">
-          <span class="exp-company">Tenaris × Texas A&M</span>
-          <span class="exp-date">Oct 2024 – Present</span>
-        </div>
-        <div class="exp-role">Data Scientist – Real-Time IAM Security</div>
-        <div class="exp-location">📍 College Station, TX</div>
-        <ul class="exp-bullets">
-          <li>Fine-tuned BERT-based LLMs and built clustering models (HDBSCAN, K-Means) to classify IAM events and detect anomalies across 100,000+ daily logs for automated risk detection.</li>
-          <li>Built scalable real-time ETL pipelines using PySpark, Apache Airflow, Kafka, and AWS (Lambda, S3) — reducing log processing latency by <strong style="color:var(--accent2)">40%</strong>.</li>
-          <li>Forecasted IAM patterns with LSTM and ARIMA on Spark, cutting incident resolution time by <strong style="color:var(--accent2)">50%</strong> via proactive threat detection.</li>
-        </ul>
-        <div style="margin-top:20px">
-          <span class="exp-tag">PySpark</span><span class="exp-tag">Kafka</span><span class="exp-tag">AWS Lambda</span>
-          <span class="exp-tag">BERT</span><span class="exp-tag">HDBSCAN</span><span class="exp-tag">LSTM</span>
-        </div>
-      </div>
-
-      <div class="exp-card reveal">
-        <div class="exp-header">
-          <span class="exp-company">Deloitte</span>
-          <span class="exp-date">Nov 2023 – Aug 2024</span>
-        </div>
-        <div class="exp-role">ML Engineer Intern</div>
-        <div class="exp-location">📍 Chennai, India</div>
-        <ul class="exp-bullets">
-          <li>Developed ML models (XGBoost, LightGBM, ARIMA) to forecast market volatility and credit risk, improving prediction accuracy by <strong style="color:var(--accent2)">30%</strong>.</li>
-          <li>Automated real-time ETL pipelines using Apache Airflow, Snowflake, and Hive to streamline risk analytics and portfolio reporting.</li>
-          <li>Reduced projected portfolio losses by <strong style="color:var(--accent2)">20%</strong> through proactive risk mitigation strategies.</li>
-        </ul>
-        <div style="margin-top:20px">
-          <span class="exp-tag">XGBoost</span><span class="exp-tag">Snowflake</span><span class="exp-tag">Airflow</span>
-          <span class="exp-tag">Hive</span><span class="exp-tag">Python</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- SKILLS -->
-  <div class="full-alt" id="skills">
-    <section>
-      <div class="reveal">
-        <div class="section-label">Toolkit</div>
-        <h2 class="section-title">Skills & Technologies</h2>
-        <p class="section-desc">A broad but deep tech stack spanning data engineering, cloud infrastructure, machine learning, and database systems.</p>
-      </div>
-
-      <div class="skills-wrapper">
-        <div class="skill-group reveal">
-          <div class="skill-group-icon">🐍</div>
-          <div class="skill-group-title">Programming & ML</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Python</span><span class="skill-tag">SQL</span>
-            <span class="skill-tag">R</span><span class="skill-tag">Bash</span>
-            <span class="skill-tag">Scala</span><span class="skill-tag">TensorFlow</span>
-            <span class="skill-tag">PyTorch</span><span class="skill-tag">Scikit-learn</span>
+        <div style={{ position: "relative", zIndex: 1, maxWidth: 700 }}>
+          {/* Avatar */}
+          <div style={{ width: 96, height: 96, borderRadius: "50%", background: `linear-gradient(135deg, ${AMBER} 0%, #92400E 100%)`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 2rem", fontSize: 32, fontWeight: 700, fontFamily: "Georgia,serif", boxShadow: `0 0 40px rgba(217,119,6,0.3)` }}>
+            VN
           </div>
-        </div>
-        <div class="skill-group reveal">
-          <div class="skill-group-icon">⚙️</div>
-          <div class="skill-group-title">Data Engineering & Cloud</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Apache Spark</span><span class="skill-tag">PySpark</span>
-            <span class="skill-tag">Kafka</span><span class="skill-tag">Airflow</span>
-            <span class="skill-tag">Snowflake</span><span class="skill-tag">Databricks</span>
-            <span class="skill-tag">AWS S3/Lambda</span><span class="skill-tag">SageMaker</span>
-            <span class="skill-tag">GCP BigQuery</span><span class="skill-tag">Docker</span>
-            <span class="skill-tag">CI/CD</span><span class="skill-tag">Hive</span>
+          <p style={{ color: AMBER, fontSize: 13, letterSpacing: 3, textTransform: "uppercase", marginBottom: 12 }}>MS Data Science · Texas A&M</p>
+          <h1 style={{ fontFamily: "Georgia,serif", fontSize: "clamp(2.4rem, 6vw, 4.5rem)", fontWeight: 700, lineHeight: 1.1, marginBottom: "1rem", color: "#F9FAFB" }}>
+            Venkateswarlu<br />Nagineni
+          </h1>
+          <p style={{ fontSize: 18, color: "rgba(255,255,255,0.6)", marginBottom: "0.5rem" }}>
+            Data Scientist &amp; ML Engineer
+          </p>
+          <p style={{ fontSize: 15, color: "rgba(255,255,255,0.4)", marginBottom: "2.5rem", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
+            <MapPin size={14} /> College Station, TX
+          </p>
+          <p style={{ color: "rgba(255,255,255,0.65)", lineHeight: 1.8, maxWidth: 560, margin: "0 auto 2.5rem", fontSize: 16 }}>
+            Building intelligent systems at the intersection of LLMs, real-time analytics, and scalable data engineering — with production experience across disaster AI, IAM security, and financial risk.
+          </p>
+
+          <div style={{ display: "flex", gap: 12, justifyContent: "center", marginBottom: "3rem" }}>
+            {[
+              { icon: <Github size={18} />, href: "https://github.com/YOUR_GITHUB", label: "GitHub" },
+              { icon: <Linkedin size={18} />, href: "https://linkedin.com/in/venkates-nagineni", label: "LinkedIn" },
+              { icon: <Mail size={18} />, href: "mailto:naginenivenkates@gmail.com", label: "Email" },
+            ].map(({ icon, href, label }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer"
+                style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 20px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(217,119,6,0.3)", borderRadius: 8, color: "rgba(255,255,255,0.7)", textDecoration: "none", fontSize: 13, transition: "all 0.2s" }}
+                onMouseEnter={e => { e.currentTarget.style.background = "rgba(217,119,6,0.15)"; e.currentTarget.style.color = "#FCD34D"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; e.currentTarget.style.color = "rgba(255,255,255,0.7)"; }}>
+                {icon} {label}
+              </a>
+            ))}
           </div>
+
+          <ChevronDown size={24} style={{ color: AMBER, animation: "bounce 2s infinite", cursor: "pointer" }} onClick={() => scrollTo("impact")} />
         </div>
-        <div class="skill-group reveal">
-          <div class="skill-group-icon">🗄️</div>
-          <div class="skill-group-title">Databases & DevOps</div>
-          <div class="skill-tags">
-            <span class="skill-tag">PostgreSQL</span><span class="skill-tag">MySQL</span>
-            <span class="skill-tag">MongoDB</span><span class="skill-tag">Redshift</span>
-            <span class="skill-tag">Power BI</span><span class="skill-tag">Matplotlib</span>
-            <span class="skill-tag">Seaborn</span><span class="skill-tag">Linux CLI</span>
-          </div>
+      </section>
+
+      {/* Impact */}
+      <section id="impact" ref={statsRef} style={{ padding: "6rem 2rem", maxWidth: 1100, margin: "0 auto" }}>
+        <SectionLabel>By the numbers</SectionLabel>
+        <SectionTitle>Measured impact</SectionTitle>
+        <p style={{ color: "rgba(255,255,255,0.5)", marginBottom: "3rem", maxWidth: 560 }}>
+          Every metric below comes directly from production systems — not benchmarks. Real pipelines, real reductions, real results.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 16 }}>
+          {impactMetrics.map((m, i) => <StatCard key={i} {...m} started={statsVisible} />)}
         </div>
-        <div class="skill-group reveal">
-          <div class="skill-group-icon">🏛️</div>
-          <div class="skill-group-title">Data Management</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Data Modeling</span><span class="skill-tag">Data Governance</span>
-            <span class="skill-tag">ETL Pipelines</span><span class="skill-tag">Data Warehousing</span>
-            <span class="skill-tag">Distributed Computing</span><span class="skill-tag">Performance Tuning</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
+      </section>
 
-  <div class="divider"></div>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="reveal">
-      <div class="section-label">Work</div>
-      <h2 class="section-title">Featured Projects</h2>
-      <p class="section-desc">Research, competitions, and personal builds that demonstrate the full breadth of my engineering and ML capabilities.</p>
-    </div>
-
-    <div class="projects-grid">
-
-      <div class="project-card reveal">
-        <div class="project-year">Aug 2025 – Present</div>
-        <div class="project-title">AgriChat — RAG LLM Chatbot</div>
-        <div class="project-desc">Built an intelligent Retrieval-Augmented Generation chatbot to analyze Texas A&M AgriLife Cotton RACE trial data. Integrated Groq-hosted Llama-3.3-70B, LlamaIndex, and FAISS for vector-based retrieval and reasoning.</div>
-        <div>
-          <span class="exp-tag">RAG</span><span class="exp-tag">LlamaIndex</span><span class="exp-tag">FAISS</span><span class="exp-tag">Llama-3.3-70B</span>
-        </div>
-        <a href="https://tamuagrichat.streamlit.app" target="_blank" style="display:inline-block;margin-top:16px;font-size:13px;color:var(--accent);text-decoration:none;">↗ tamuagrichat.streamlit.app</a>
-      </div>
-
-      <div class="project-card reveal">
-        <div class="project-year">May 2024</div>
-        <div class="project-title">Efficient DeepFake Image Detection via Dense CNN</div>
-        <div class="project-desc">Presented a novel deepfake detection method at SRM International Conference on Sustainable Computing. Optimized the image processing pipeline, reducing processing time by 30% while improving detection accuracy.</div>
-        <div>
-          <span class="exp-tag">CNN</span><span class="exp-tag">Computer Vision</span><span class="exp-tag">Deep Learning</span>
-        </div>
-        <div class="project-award" style="margin-top:16px">🏆 Best Paper Award · Springer Book Chapter</div>
-      </div>
-
-      <div class="project-card reveal">
-        <div class="project-year">Oct 2023</div>
-        <div class="project-title">Image Synthesis from Text via VQGAN + CLIP</div>
-        <div class="project-desc">Developed a text-to-image synthesis system using VQGAN and CLIP, demonstrating novel generative capabilities. Presented at SRM National Conference on Technology for Society.</div>
-        <div>
-          <span class="exp-tag">VQGAN</span><span class="exp-tag">CLIP</span><span class="exp-tag">Generative AI</span>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <div class="project-year">Oct 2023</div>
-        <div class="project-title">Customer Segmentation Model</div>
-        <div class="project-desc">Built a predictive analytics model for customer segmentation using clustering and classification techniques. Competed in HackerEarth Data Science Hackathon against 300+ participants.</div>
-        <div>
-          <span class="exp-tag">Clustering</span><span class="exp-tag">Classification</span><span class="exp-tag">Python</span>
-        </div>
-        <div class="project-award" style="margin-top:16px">🥈 2nd Place — 300+ Participants</div>
-      </div>
-
-      <div class="project-card reveal">
-        <div class="project-year">Nov 2024</div>
-        <div class="project-title">TAMU Datathon — FinTech Analytics</div>
-        <div class="project-desc">Built fintech dashboards and analytics models on large datasets to generate actionable business insights at Texas A&M's premier data competition.</div>
-        <div>
-          <span class="exp-tag">Analytics</span><span class="exp-tag">Dashboard</span><span class="exp-tag">FinTech</span>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <div class="project-year">Jan 2025</div>
-        <div class="project-title">TAMUhack — Judge & Evaluator</div>
-        <div class="project-desc">Evaluated AI, fintech, and automation projects at TAMU's largest hackathon, assessing technical feasibility, creativity, and real-world impact across 100+ submissions.</div>
-        <div>
-          <span class="exp-tag">AI</span><span class="exp-tag">FinTech</span><span class="exp-tag">Automation</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- EDUCATION -->
-  <div class="full-alt" id="education">
-    <section>
-      <div class="reveal">
-        <div class="section-label">Academic</div>
-        <h2 class="section-title">Education</h2>
-        <p class="section-desc">Strong academic foundation in Data Science and AI, backed by top-tier institutions across two continents.</p>
-      </div>
-
-      <div class="edu-grid">
-        <div class="edu-card reveal">
-          <div class="edu-badge">Graduate</div>
-          <div class="edu-school">Texas A&M University</div>
-          <div class="edu-degree">MS in Data Science</div>
-          <div class="edu-meta">Aug 2024 – May 2026 · College Station, TX</div>
-          <div class="edu-gpa">3.6 <span style="font-size:16px;font-weight:400;color:var(--text-tertiary)">/4.0</span></div>
-          <div class="edu-gpa-label">Grade Point Average</div>
-        </div>
-        <div class="edu-card reveal">
-          <div class="edu-badge">Undergraduate</div>
-          <div class="edu-school">SRM University</div>
-          <div class="edu-degree">B.Tech, CS — AI & Machine Learning</div>
-          <div class="edu-meta">Oct 2020 – May 2024 · Chennai, India</div>
-          <div class="edu-gpa">9.6 <span style="font-size:16px;font-weight:400;color:var(--text-tertiary)">/10</span></div>
-          <div class="edu-gpa-label">Grade Point Average</div>
-        </div>
-      </div>
-
-      <!-- CERTIFICATIONS -->
-      <div style="margin-top:60px">
-        <div class="section-label" style="margin-bottom:12px">Certifications</div>
-        <div class="certs-row">
-          <div class="cert-card reveal">
-            <div class="cert-icon azure">☁️</div>
-            <div>
-              <div class="cert-name">Azure Data Scientist Associate</div>
-              <div class="cert-id">Microsoft · ID: 54DF218C9761841C</div>
-            </div>
-          </div>
-          <div class="cert-card reveal">
-            <div class="cert-icon ibm">🔷</div>
-            <div>
-              <div class="cert-name">IBM Cloud Computing</div>
-              <div class="cert-id">IBM Certified</div>
-            </div>
-          </div>
-          <div class="cert-card reveal">
-            <div class="cert-icon ibm">📊</div>
-            <div>
-              <div class="cert-name">IBM Data Analytics</div>
-              <div class="cert-id">IBM Certified</div>
+      {/* Experience */}
+      <section id="experience" style={{ padding: "6rem 2rem", background: "rgba(255,255,255,0.02)", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <SectionLabel>Career</SectionLabel>
+          <SectionTitle>Experience</SectionTitle>
+          <div style={{ position: "relative", marginTop: "3rem" }}>
+            <div style={{ position: "absolute", left: 18, top: 0, bottom: 0, width: 1, background: "linear-gradient(to bottom, rgba(217,119,6,0.6), rgba(217,119,6,0.1))" }} />
+            <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+              {experience.map((exp, i) => (
+                <div key={i} style={{ paddingLeft: "3.5rem", position: "relative" }}>
+                  <div style={{ position: "absolute", left: 10, top: 8, width: 16, height: 16, borderRadius: "50%", background: exp.color, boxShadow: `0 0 12px ${exp.color}80`, border: "2px solid #0B0F17" }} />
+                  <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "1.5rem", transition: "border-color 0.2s" }}
+                    onMouseEnter={e => e.currentTarget.style.borderColor = `${exp.color}50`}
+                    onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>
+                      <div>
+                        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                          <h3 style={{ fontFamily: "Georgia,serif", fontSize: 18, color: "#F9FAFB", margin: 0 }}>{exp.role}</h3>
+                          {exp.tag && <span style={{ fontSize: 11, padding: "2px 10px", borderRadius: 20, background: `${exp.color}25`, color: exp.color, border: `1px solid ${exp.color}40`, letterSpacing: 0.5 }}>{exp.tag}</span>}
+                        </div>
+                        <p style={{ color: exp.color, fontSize: 14, margin: "4px 0 0" }}>{exp.company}</p>
+                      </div>
+                      <div style={{ textAlign: "right" }}>
+                        <p style={{ color: "rgba(255,255,255,0.45)", fontSize: 13, margin: 0 }}>{exp.period}</p>
+                        <p style={{ color: "rgba(255,255,255,0.3)", fontSize: 12, margin: "2px 0 0", display: "flex", alignItems: "center", gap: 4, justifyContent: "flex-end" }}><MapPin size={11} />{exp.location}</p>
+                      </div>
+                    </div>
+                    <ul style={{ margin: "0 0 16px", padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
+                      {exp.highlights.map((h, j) => (
+                        <li key={j} style={{ display: "flex", gap: 10, color: "rgba(255,255,255,0.65)", fontSize: 14, lineHeight: 1.7 }}>
+                          <span style={{ color: exp.color, marginTop: 2, flexShrink: 0 }}>▹</span>
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                      {exp.tech.map(t => (
+                        <span key={t} style={{ fontSize: 11, padding: "3px 10px", borderRadius: 20, background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.5)", border: "1px solid rgba(255,255,255,0.1)" }}>{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-    </section>
-  </div>
+      {/* Skills */}
+      <section id="skills" style={{ padding: "6rem 2rem", maxWidth: 1100, margin: "0 auto" }}>
+        <SectionLabel>Technical depth</SectionLabel>
+        <SectionTitle>Skills &amp; Technologies</SectionTitle>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem", marginTop: "3rem", alignItems: "start" }}>
+          {/* Bar chart */}
+          <div>
+            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 13, marginBottom: "1.5rem", letterSpacing: 0.5 }}>Self-assessed proficiency across domains</p>
+            <div style={{ width: "100%", height: skillData.length * 44 + 20 }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={skillData} layout="vertical" margin={{ left: 0, right: 24, top: 0, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" horizontal={false} />
+                  <XAxis type="number" domain={[0, 100]} tick={{ fill: "rgba(255,255,255,0.3)", fontSize: 11 }} tickFormatter={v => `${v}%`} axisLine={false} tickLine={false} />
+                  <YAxis type="category" dataKey="skill" width={200} tick={{ fill: "rgba(255,255,255,0.6)", fontSize: 12 }} axisLine={false} tickLine={false} />
+                  <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(255,255,255,0.03)" }} />
+                  <Bar dataKey="score" radius={[0, 4, 4, 0]}>
+                    {skillData.map((_, i) => (
+                      <Cell key={i} fill={i === 0 ? "#059669" : i <= 2 ? AMBER : "#6366F1"} fillOpacity={0.85} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
 
-  <!-- CONTACT -->
-  <div class="contact-section" id="contact">
-    <div class="contact-card reveal">
-      <div class="section-label" style="justify-content:center;display:flex;margin-bottom:16px">Let's Connect</div>
-      <div class="contact-title">Ready to build<br><span style="background:var(--gradient1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">something great?</span></div>
-      <p class="contact-sub">Open to full-time data engineering, ML engineering, and data science roles.</p>
-      <div class="contact-links">
-        <a href="mailto:naginenivenkates@gmail.com" class="contact-link">
-          ✉️ Email Me
-        </a>
-        <a href="https://linkedin.com/in/venkates-nagineni" target="_blank" class="contact-link">
-          💼 LinkedIn
-        </a>
-        <a href="tel:+19793265354" class="contact-link">
-          📞 +1 (979) 326 5354
-        </a>
-      </div>
+          {/* Skill categories */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            {[
+              { cat: "Languages & ML", color: AMBER, items: ["Python", "SQL", "R", "Bash", "Scikit-learn", "TensorFlow", "PyTorch", "XGBoost", "LightGBM"] },
+              { cat: "LLM & AI Frameworks", color: "#059669", items: ["LangChain", "LlamaIndex", "FAISS", "BERT fine-tuning", "LSTM", "ARIMA", "HDBSCAN", "RAG pipelines"] },
+              { cat: "Data Engineering", color: "#6366F1", items: ["Apache Spark", "PySpark", "Kafka", "Airflow", "Snowflake", "Databricks", "Docker", "CI/CD"] },
+              { cat: "Cloud & Databases", color: "#EC4899", items: ["AWS (S3, Lambda, SageMaker, EC2)", "GCP BigQuery", "MySQL", "PostgreSQL", "MongoDB", "Redshift"] },
+            ].map(({ cat, color, items }) => (
+              <div key={cat} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderLeft: `3px solid ${color}`, borderRadius: 10, padding: "1rem 1.25rem" }}>
+                <h4 style={{ color, fontSize: 13, fontWeight: 600, margin: "0 0 10px", letterSpacing: 0.5, textTransform: "uppercase" }}>{cat}</h4>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                  {items.map(t => <span key={t} style={{ fontSize: 12, padding: "3px 10px", borderRadius: 20, background: `${color}15`, color: "rgba(255,255,255,0.7)", border: `1px solid ${color}30` }}>{t}</span>)}
+                </div>
+              </div>
+            ))}
+            {/* Certs */}
+            <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(217,119,6,0.2)", borderRadius: 10, padding: "1rem 1.25rem" }}>
+              <h4 style={{ color: AMBER, fontSize: 13, fontWeight: 600, margin: "0 0 10px", letterSpacing: 0.5, textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><Award size={14} /> Certifications</h4>
+              {["Microsoft Certified: Azure Data Scientist Associate", "IBM Cloud Computing", "IBM Data Analytics"].map(c => (
+                <p key={c} style={{ color: "rgba(255,255,255,0.6)", fontSize: 13, margin: "4px 0", display: "flex", gap: 8 }}><span style={{ color: AMBER }}>✓</span>{c}</p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" style={{ padding: "6rem 2rem", background: "rgba(255,255,255,0.02)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <SectionLabel>Work</SectionLabel>
+          <SectionTitle>Featured Projects</SectionTitle>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, marginTop: "3rem" }}>
+            {projects.map((p, i) => (
+              <div key={i} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "1.5rem", display: "flex", flexDirection: "column", gap: 12, transition: "border-color 0.2s, transform 0.2s" }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = `${AMBER}50`; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                {p.badge && <span style={{ fontSize: 12, color: AMBER_LIGHT, background: `${AMBER}20`, border: `1px solid ${AMBER}40`, padding: "3px 10px", borderRadius: 20, alignSelf: "flex-start" }}>{p.badge}</span>}
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                  <h3 style={{ fontFamily: "Georgia,serif", fontSize: 16, color: "#F9FAFB", margin: 0, lineHeight: 1.4 }}>{p.title}</h3>
+                  {p.link && <a href={p.link} target="_blank" rel="noopener noreferrer" style={{ color: "rgba(255,255,255,0.3)", transition: "color 0.2s" }} onMouseEnter={e => e.target.style.color = AMBER} onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.3)"}><ExternalLink size={16} /></a>}
+                </div>
+                <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", margin: 0 }}>{p.period}</p>
+                <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, margin: 0, flex: 1 }}>{p.description}</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                  {p.tech.map(t => <span key={t} style={{ fontSize: 11, padding: "3px 10px", borderRadius: 20, background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.5)", border: "1px solid rgba(255,255,255,0.1)" }}>{t}</span>)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Education */}
+      <section id="education" style={{ padding: "6rem 2rem", maxWidth: 900, margin: "0 auto" }}>
+        <SectionLabel>Background</SectionLabel>
+        <SectionTitle>Education</SectionTitle>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, marginTop: "3rem" }}>
+          {[
+            { school: "Texas A&M University", degree: "M.S. Data Science", period: "Aug 2024 – May 2026", gpa: "3.6 / 4.0", accent: AMBER },
+            { school: "SRM University", degree: "B.Tech CS — AI & ML Specialization", period: "Oct 2020 – May 2024", gpa: "9.6 / 10", accent: "#6366F1" },
+          ].map(({ school, degree, period, gpa, accent }) => (
+            <div key={school} style={{ background: "rgba(255,255,255,0.03)", border: `1px solid ${accent}30`, borderTop: `3px solid ${accent}`, borderRadius: 12, padding: "1.5rem" }}>
+              <h3 style={{ fontFamily: "Georgia,serif", color: accent, fontSize: 20, margin: "0 0 8px" }}>{school}</h3>
+              <p style={{ color: "#F9FAFB", fontSize: 15, margin: "0 0 8px" }}>{degree}</p>
+              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: 13, margin: "0 0 4px" }}>{period}</p>
+              <p style={{ color: AMBER_LIGHT, fontSize: 14, margin: 0, fontWeight: 600 }}>GPA: {gpa}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer style={{ padding: "2.5rem 2rem", borderTop: "1px solid rgba(255,255,255,0.06)", textAlign: "center" }}>
+        <p style={{ color: "rgba(255,255,255,0.3)", fontSize: 13 }}>
+          <a href="tel:+19793265354" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>+1 (979) 326-5354</a>
+          {" · "}
+          <a href="mailto:naginenivenkates@gmail.com" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>naginenivenkates@gmail.com</a>
+        </p>
+        <p style={{ color: "rgba(255,255,255,0.15)", fontSize: 12, marginTop: 8 }}>© 2026 Venkateswarlu Nagineni</p>
+      </footer>
+
+      <style>{`
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #0B0F17; }
+        ::-webkit-scrollbar-thumb { background: ${AMBER_DIM}; border-radius: 2px; }
+      `}</style>
     </div>
-  </div>
+  );
+}
 
-  <footer>
-    <p>© 2026 Venkateswarlu Nagineni · Built with care · College Station, TX</p>
-  </footer>
-
-  <script>
-    // ── SET YOUR PHOTO HERE ──────────────────────────────────────────────
-    // Replace the empty string with your image URL or relative path
-    // e.g. "profile.jpg"  or  "https://github.com/yourhandle.png"
-    const PROFILE_PHOTO = "profile (2).jpg";
-    // ────────────────────────────────────────────────────────────────────
-
-    if (PROFILE_PHOTO) {
-      document.getElementById('nav-img').src = PROFILE_PHOTO;
-      document.getElementById('hero-img').src = PROFILE_PHOTO;
-    }
-
-    // Stagger children in grids
-    document.querySelectorAll('.exp-grid, .skills-wrapper, .projects-grid, .edu-grid, .certs-row').forEach(grid => {
-      grid.querySelectorAll('.reveal').forEach((el, i) => {
-        el.style.transitionDelay = `${i * 0.08}s`;
-      });
-    });
-
-    // Scroll reveal — opt-in only if IntersectionObserver fires correctly
-    // (prevents blank sections in iframe/preview environments)
-    const testEl = document.createElement('div');
-    testEl.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;pointer-events:none';
-    document.body.appendChild(testEl);
-    let observerFired = false;
-
-    const testObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        observerFired = true;
-        testObserver.disconnect();
-        testEl.remove();
-
-        document.body.classList.add('js-reveal-ready');
-
-        const revealObserver = new IntersectionObserver((entries) => {
-          entries.forEach(e => {
-            if (e.isIntersecting) {
-              e.target.classList.add('visible');
-              revealObserver.unobserve(e.target);
-            }
-          });
-        }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-
-        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-      }
-    });
-    testObserver.observe(testEl);
-
-    // Fallback: if observer never fires in 500ms, keep all content visible
-    setTimeout(() => {
-      if (!observerFired) {
-        testObserver.disconnect();
-        testEl.remove();
-      }
-    }, 500);
-  </script>
-
-</body>
-</html>
+function SectionLabel({ children }) {
+  return (
+    <p style={{ color: AMBER, fontSize: 12, letterSpacing: 3, textTransform: "uppercase", marginBottom: 8, fontWeight: 500 }}>
+      {children}
+    </p>
+  );
+}
+function SectionTitle({ children }) {
+  return (
+    <h2 style={{ fontFamily: "Georgia,serif", fontSize: "clamp(1.8rem, 4vw, 2.8rem)", color: "#F9FAFB", fontWeight: 700, lineHeight: 1.2, marginBottom: "0.5rem" }}>
+      {children}
+    </h2>
+  );
+}
