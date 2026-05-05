@@ -24,6 +24,10 @@
     --indigo: #818CF8;
     --pink: #F472B6;
     --teal: #2DD4BF;
+    --cyan: #22D3EE;
+    --orange: #FB923C;
+    --violet: #A78BFA;
+    --rose: #FB7185;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -554,6 +558,276 @@
   }
   .cert-card:hover .cert-icon { opacity: 0.8; }
 
+  /* KAGGLE COMPETITIONS */
+  #kaggle { background: var(--bg-2); }
+
+  .kaggle-timeline {
+    margin-top: 4rem;
+    position: relative;
+  }
+  .kaggle-timeline::before {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--amber), var(--indigo), var(--green), var(--pink));
+    opacity: 0.3;
+  }
+
+  .kaggle-year-group {
+    margin-bottom: 3rem;
+  }
+
+  .kaggle-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: rgba(217,119,6,0.12);
+    margin-bottom: 1.5rem;
+    padding-left: 70px;
+    letter-spacing: -1px;
+  }
+
+  .kaggle-item {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.2rem 0;
+    padding-left: 0;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .kaggle-item:hover {
+    background: rgba(217,119,6,0.02);
+    border-radius: 4px;
+    padding-left: 0.5rem;
+  }
+
+  .kaggle-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--kg-color, var(--amber));
+    flex-shrink: 0;
+    margin-top: 6px;
+    position: relative;
+    z-index: 1;
+    margin-left: 23px;
+    box-shadow: 0 0 12px color-mix(in srgb, var(--kg-color, var(--amber)) 40%, transparent);
+  }
+
+  .kaggle-content { flex: 1; }
+
+  .kaggle-comp-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+    line-height: 1.35;
+    margin-bottom: 4px;
+  }
+  .kaggle-comp-name a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .kaggle-comp-name a:hover { color: var(--amber-light); }
+
+  .kaggle-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .kaggle-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+  .kaggle-type-featured { color: var(--amber-light); border-color: rgba(251,191,36,0.3); background: rgba(251,191,36,0.08); }
+  .kaggle-type-research { color: var(--green); border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.08); }
+  .kaggle-type-playground { color: var(--indigo); border-color: rgba(129,140,248,0.3); background: rgba(129,140,248,0.08); }
+  .kaggle-type-getting-started { color: var(--teal); border-color: rgba(45,212,191,0.3); background: rgba(45,212,191,0.08); }
+
+  .kaggle-teams {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+  }
+
+  .kaggle-prize {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--amber);
+    letter-spacing: 0.5px;
+  }
+
+  .kaggle-desc {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(240,235,227,0.5);
+    margin-bottom: 8px;
+  }
+
+  .kaggle-relevance {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    font-style: italic;
+    padding-left: 12px;
+    border-left: 2px solid var(--kg-color, var(--amber));
+    line-height: 1.6;
+  }
+
+  /* EVENTS SECTION */
+  #events { background: var(--bg); }
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .event-card {
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 2.2rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: rgba(240,235,227,0.015);
+  }
+  .event-card:hover {
+    transform: translateY(-4px);
+    background: rgba(240,235,227,0.03);
+    border-color: var(--ev-color, var(--amber));
+  }
+
+  .event-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--ev-color, var(--amber));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease;
+  }
+  .event-card:hover::before { transform: scaleX(1); }
+
+  .event-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .event-brand-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 900;
+    background: color-mix(in srgb, var(--ev-color, var(--amber)) 12%, transparent);
+    color: var(--ev-color, var(--amber));
+    border: 1px solid color-mix(in srgb, var(--ev-color, var(--amber)) 25%, transparent);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .event-brand-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ev-color, var(--amber));
+  }
+
+  .event-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+  }
+
+  .event-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  .event-date, .event-location {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .event-date::before { content: '📅'; font-size: 12px; }
+  .event-location::before { content: '📍'; font-size: 12px; }
+
+  .event-desc {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: rgba(240,235,227,0.5);
+    flex: 1;
+  }
+
+  .event-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .event-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--ev-color, var(--amber)) 10%, transparent);
+    color: rgba(240,235,227,0.6);
+    border: 1px solid color-mix(in srgb, var(--ev-color, var(--amber)) 20%, transparent);
+    letter-spacing: 0.3px;
+  }
+
+  .event-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ev-color, var(--amber));
+    opacity: 0;
+    transition: opacity 0.3s, letter-spacing 0.3s;
+    align-self: flex-start;
+  }
+  .event-card:hover .event-cta {
+    opacity: 1;
+    letter-spacing: 3px;
+  }
+
+  .event-status {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 12px;
+    border-radius: 20px;
+    align-self: flex-start;
+  }
+  .status-upcoming { color: var(--green); background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); }
+  .status-past { color: var(--text-dim); background: rgba(240,235,227,0.04); border: 1px solid rgba(240,235,227,0.1); }
+  .status-registered { color: var(--amber-light); background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); }
+
   /* PROJECTS */
   #projects { background: var(--bg-2); }
 
@@ -779,6 +1053,7 @@
     .projects-grid { grid-template-columns: 1fr; }
     .edu-grid { grid-template-columns: 1fr; }
     .certs-grid { grid-template-columns: repeat(2, 1fr); }
+    .events-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 600px) {
@@ -801,6 +1076,8 @@
     <a href="#experience">Experience</a>
     <a href="#skills">Skills</a>
     <a href="#certifications">Certifications</a>
+    <a href="#kaggle">Kaggle</a>
+    <a href="#events">Events</a>
     <a href="#projects">Projects</a>
     <a href="#education">Education</a>
   </div>
@@ -1106,7 +1383,6 @@
         </div>
       </a>
 
-      <!-- placeholder for future certs -->
       <div class="cert-card reveal reveal-delay-6" style="--cert-color: rgba(240,235,227,0.1); cursor: default; opacity: 0.4; border: 1px dashed rgba(240,235,227,0.1);">
         <div class="cert-issuer" style="color:var(--text-dim);">
           <div class="cert-issuer-dot" style="background:var(--text-dim);"></div>In Progress
@@ -1116,6 +1392,334 @@
           <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:2px;">Coming soon</span>
         </div>
       </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- KAGGLE COMPETITIONS -->
+<section id="kaggle">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">Competitions</p>
+      <h2 class="section-title">Kaggle <em>Legacy</em></h2>
+      <p style="font-family:'Crimson Pro',serif;font-size:1.05rem;color:var(--text-muted);max-width:560px;margin-top:0.5rem;line-height:1.7;">
+        Curated competitions from the world's largest data science platform — spanning NLP, computer vision, time-series, and tabular ML. Each competition sharpens a different edge of the skillset.
+      </p>
+    </div>
+
+    <div class="kaggle-timeline">
+
+      <!-- 2025 -->
+      <div class="kaggle-year-group reveal reveal-delay-1">
+        <div class="kaggle-year">2025</div>
+
+        <div class="kaggle-item" style="--kg-color: var(--amber);">
+          <div class="kaggle-dot"></div>
+          <div class="kaggle-content">
+            <div class="kaggle-comp-name"><a href="https://www.kaggle.com/competitions/arc-prize-2025" target="_blank">ARC Prize 2025</a></div>
+            <div class="kaggle-meta">
+              <span class="kaggle-type kaggle-type-featured">Featured</span>
+              <span class="kaggle-prize">$725,000</span>
+            </div>
+            <p class="kaggle-desc">Create AI capable of solving novel reasoning tasks it has never encountered before — the frontier of artificial general intelligence research.</p>
+            <div class="kaggle-relevance">Directly relevant to agentic AI work at Interlinked — abstract reasoning &amp; generalization beyond training data.</div>
+          </div>
+        </div>
+
+        <div class="kaggle-item" style="--kg-color: var(--green);">
+          <div class="kaggle-dot"></div>
+          <div class="kaggle-content">
+            <div class="kaggle-comp-name"><a href="https://www.kaggle.com/competitions/birdclef-2025" target="_blank">BirdCLEF+ 2025</a></div>
+            <div class="kaggle-meta">
+              <span class="kaggle-type kaggle-type-research">Research</span>
+              <span class="kaggle-prize">$50,000</span>
+            </div>
+            <p class="kaggle-desc">Identify bird species from soundscape recordings — advancing audio ML and conservation-driven AI applications.</p>
+            <div class="kaggle-relevance">Audio signal processing + deep learning — extends CNN/spectrogram expertise from computer vision work.</div>
+          </div>
+        </div>
+
+        <div class="kaggle-item" style="--kg-color: var(--indigo);">
+          <div class="kaggle-dot"></div>
+          <div class="kaggle-content">
+            <div class="kaggle-comp-name"><a href="https://www.kaggle.com/competitions/playground-series-s5" target="_blank">Playground Series — Season 5</a></div>
+            <div class="kaggle-meta">
+              <span class="kaggle-type kaggle-type-playground">Playground</span>
+              <span class="kaggle-teams">Monthly challenges</span>
+            </div>
+            <p class="kaggle-desc">Rolling monthly tabular ML challenges covering regression, classification, and multi-target prediction across synthetic datasets.</p>
+            <div class="kaggle-relevance">Ongoing skill sharpening — XGBoost, LightGBM, feature engineering techniques used daily in production pipelines.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="kaggle-year-group reveal reveal-delay-2">
+        <div class="kaggle-year">2024</div>
+
+        <div class="kaggle-item" style="--kg-color: var(--pink);">
+          <div class="kaggle-dot"></div>
+          <div class="kaggle-content">
+            <div class="kaggle-comp-name"><a href="https://www.kaggle.com/competitions/arc-prize-2024" target="_blank">ARC Prize 2024</a></div>
+            <div class="kaggle-meta">
+              <span class="kaggle-type kaggle-type-featured">Featured</span>
+              <span class="kaggle-prize">$1,100,000+</span>
+              <span class="kaggle-teams">1,427 teams</span>
+            </div>
+            <p class="kaggle-desc">The landmark $1M+ challenge that reignited global interest in abstract reasoning — pushing beyond pattern matching toward true intelligence.</p>
+            <div class="kaggle-relevance">Grand challenge in reasoning — connects to LLM limitations explored in RAG &amp; LangChain agentic workflows.</div>
+          </div>
+        </div>
+
+        <div class="kaggle-item" style="--kg-color: var(--teal);">
+          <div class="kaggle-dot"></div>
+          <div class="kaggle-content">
+            <div class="kaggle-comp-name"><a href="https://www.kaggle.com/competitions/leash-BELKA" target="_blank">Leash Bio — Predict New Medicines with BELKA</a></div>
+            <div class="kaggle-meta">
+              <span class="kaggle-type kaggle-type-featured">Featured</span>
+              <span class="kaggle-prize">$50,000</span>
+            </div>
+            <p class="kaggle-desc">Predict small molecule binding to protein targets — a key challenge in computational drug discovery using molecular featurization and GNNs.</p>
+            <div class="kaggle-relevance">Feature engineering at massive scale — applies ensemble methods (XGBoost/LightGBM) in a scientific domain.</div>
+          </div>
+        </div>
+
+        <div class="kaggle-item" style="--kg-color: var(--amber);">
+          <div class="kaggle-dot"></div>
+          <div class="kaggle-content">
+            <div class="kaggle-comp-name"><a href="https://www.kaggle.com/competitions/lmsys-chatbot-arena" target="_blank">LMSYS — Chatbot Arena Human Preference</a></div>
+            <div class="kaggle-meta">
+              <span class="kaggle-type kaggle-type-featured">Featured</span>
+              <span class="kaggle-prize">$100,000</span>
+            </div>
+            <p class="kaggle-desc">Predict human preferences in head-to-head LLM battles — directly advancing RLHF and LLM evaluation methodology.</p>
+            <div class="kaggle-relevance">Core to LLM fine-tuning expertise — BERT classification &amp; preference modeling mirror the IAM log classification work.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="kaggle-year-group reveal reveal-delay-3">
+        <div class="kaggle-year">2023</div>
+
+        <div class="kaggle-item" style="--kg-color: var(--green);">
+          <div class="kaggle-dot"></div>
+          <div class="kaggle-content">
+            <div class="kaggle-comp-name"><a href="https://www.kaggle.com/competitions/optiver-trading-at-the-close" target="_blank">Optiver — Trading at the Close</a></div>
+            <div class="kaggle-meta">
+              <span class="kaggle-type kaggle-type-featured">Featured</span>
+              <span class="kaggle-prize">$100,000</span>
+            </div>
+            <p class="kaggle-desc">Predict US stock closing price movements using order book data — a high-frequency time-series forecasting challenge with real financial impact.</p>
+            <div class="kaggle-relevance">Directly extends Deloitte financial risk work — ARIMA, LSTM, and gradient-boosted trees on financial time-series.</div>
+          </div>
+        </div>
+
+        <div class="kaggle-item" style="--kg-color: var(--indigo);">
+          <div class="kaggle-dot"></div>
+          <div class="kaggle-content">
+            <div class="kaggle-comp-name"><a href="https://www.kaggle.com/competitions/llm-detect-ai-generated-text" target="_blank">LLM — Detect AI Generated Text</a></div>
+            <div class="kaggle-meta">
+              <span class="kaggle-type kaggle-type-featured">Featured</span>
+              <span class="kaggle-prize">$15,000</span>
+            </div>
+            <p class="kaggle-desc">Distinguish human-written from machine-generated essays — a transformer-based NLP classification problem at the heart of AI safety.</p>
+            <div class="kaggle-relevance">BERT fine-tuning &amp; text classification — same techniques powering the IAM event categorization pipeline at Tenaris.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2022 -->
+      <div class="kaggle-year-group reveal reveal-delay-4">
+        <div class="kaggle-year">2022</div>
+
+        <div class="kaggle-item" style="--kg-color: var(--amber);">
+          <div class="kaggle-dot"></div>
+          <div class="kaggle-content">
+            <div class="kaggle-comp-name"><a href="https://www.kaggle.com/competitions/google-universal-image-embedding" target="_blank">Google Universal Image Embedding</a></div>
+            <div class="kaggle-meta">
+              <span class="kaggle-type kaggle-type-featured">Featured</span>
+              <span class="kaggle-teams">15,361 teams</span>
+            </div>
+            <p class="kaggle-desc">Build universal image embedding models that generalize across domains — foundational work in representation learning and CLIP-style architectures.</p>
+            <div class="kaggle-relevance">Foundation for VQGAN+CLIP image synthesis project — vision transformer embeddings &amp; multimodal representation.</div>
+          </div>
+        </div>
+
+        <div class="kaggle-item" style="--kg-color: var(--pink);">
+          <div class="kaggle-dot"></div>
+          <div class="kaggle-content">
+            <div class="kaggle-comp-name"><a href="https://www.kaggle.com/competitions/amex-default-prediction" target="_blank">American Express — Default Prediction</a></div>
+            <div class="kaggle-meta">
+              <span class="kaggle-type kaggle-type-featured">Featured</span>
+              <span class="kaggle-prize">$100,000</span>
+            </div>
+            <p class="kaggle-desc">Predict credit card default from aggregated profile features — the definitive tabular ML competition with massive feature spaces and imbalanced targets.</p>
+            <div class="kaggle-relevance">Credit risk modeling mirrors Deloitte financial risk work — XGBoost ensembles, feature engineering on imbalanced data.</div>
+          </div>
+        </div>
+
+        <div class="kaggle-item" style="--kg-color: var(--teal);">
+          <div class="kaggle-dot"></div>
+          <div class="kaggle-content">
+            <div class="kaggle-comp-name"><a href="https://www.kaggle.com/competitions/feedback-prize-english-language-learning" target="_blank">Feedback Prize — English Language Learning</a></div>
+            <div class="kaggle-meta">
+              <span class="kaggle-type kaggle-type-featured">Featured</span>
+              <span class="kaggle-prize">$60,000</span>
+            </div>
+            <p class="kaggle-desc">Score student essays on multiple dimensions — NLP regression with transformer fine-tuning and multi-task learning.</p>
+            <div class="kaggle-relevance">NLP scoring &amp; BERT fine-tuning — same transformer techniques applied to IAM log classification and text pipelines.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS & CONFERENCES -->
+<section id="events">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">Community</p>
+      <h2 class="section-title">Events &amp; <em>Conferences</em></h2>
+      <p style="font-family:'Crimson Pro',serif;font-size:1.05rem;color:var(--text-muted);max-width:560px;margin-top:0.5rem;line-height:1.7;">
+        Staying at the frontier means learning from the teams building it. These are the flagship developer events shaping my roadmap.
+      </p>
+    </div>
+
+    <div class="events-grid">
+
+      <!-- Microsoft Build 2026 -->
+      <a href="https://build.microsoft.com/en-US/home" target="_blank" class="event-card reveal reveal-delay-1" style="--ev-color: var(--cyan);">
+        <div class="event-brand">
+          <div class="event-brand-icon">MS</div>
+          <div class="event-brand-name">Microsoft</div>
+        </div>
+        <span class="event-status status-upcoming">Upcoming</span>
+        <div class="event-name">Microsoft Build 2026</div>
+        <div class="event-details">
+          <div class="event-date">Jun 2–3, 2026</div>
+          <div class="event-location">San Francisco & Online</div>
+        </div>
+        <p class="event-desc">Microsoft's premier developer conference — diving deep into production AI systems, agentic architectures, Azure AI Foundry, and next-gen developer tooling. Focus areas include AI agent orchestration, Copilot extensibility, and real-code engineering at scale.</p>
+        <div class="event-tags">
+          <span class="event-tag">Agentic AI</span>
+          <span class="event-tag">Azure AI</span>
+          <span class="event-tag">Copilot</span>
+          <span class="event-tag">Production AI</span>
+        </div>
+        <span class="event-cta">Register ↗</span>
+      </a>
+
+      <!-- Google Cloud Next 2026 -->
+      <a href="https://cloud.google.com/events" target="_blank" class="event-card reveal reveal-delay-2" style="--ev-color: var(--green);">
+        <div class="event-brand">
+          <div class="event-brand-icon">G</div>
+          <div class="event-brand-name">Google Cloud</div>
+        </div>
+        <span class="event-status status-past">Completed</span>
+        <div class="event-name">Google Cloud Next '26</div>
+        <div class="event-details">
+          <div class="event-date">Apr 22–24, 2026</div>
+          <div class="event-location">Las Vegas, NV</div>
+        </div>
+        <p class="event-desc">Google Cloud's flagship conference featuring keynotes on Gemini, Vertex AI agent building, BigQuery ML workflows, and hands-on labs for deploying agentic AI at enterprise scale. Record-breaking attendance with focus on production agentic patterns.</p>
+        <div class="event-tags">
+          <span class="event-tag">Gemini</span>
+          <span class="event-tag">Vertex AI</span>
+          <span class="event-tag">BigQuery ML</span>
+          <span class="event-tag">Agentic AI</span>
+        </div>
+        <span class="event-cta">View sessions ↗</span>
+      </a>
+
+      <!-- Microsoft Build 2025 -->
+      <a href="https://news.microsoft.com/build-2025/" target="_blank" class="event-card reveal reveal-delay-3" style="--ev-color: var(--indigo);">
+        <div class="event-brand">
+          <div class="event-brand-icon">MS</div>
+          <div class="event-brand-name">Microsoft</div>
+        </div>
+        <span class="event-status status-past">Completed</span>
+        <div class="event-name">Microsoft Build 2025</div>
+        <div class="event-details">
+          <div class="event-date">May 19–22, 2025</div>
+          <div class="event-location">Seattle, WA & Online</div>
+        </div>
+        <p class="event-desc">Four-day deep dive covering the open agentic network, GitHub Copilot evolution, Azure OpenAI Service, NLWeb for conversational interfaces, and the shift toward agentic DevOps across the software lifecycle.</p>
+        <div class="event-tags">
+          <span class="event-tag">Open Agents</span>
+          <span class="event-tag">GitHub Copilot</span>
+          <span class="event-tag">Azure OpenAI</span>
+          <span class="event-tag">NLWeb</span>
+        </div>
+        <span class="event-cta">Recap ↗</span>
+      </a>
+
+      <!-- Google Cloud Next 2025 -->
+      <a href="https://cloud.google.com/security/next" target="_blank" class="event-card reveal reveal-delay-4" style="--ev-color: var(--amber);">
+        <div class="event-brand">
+          <div class="event-brand-icon">G</div>
+          <div class="event-brand-name">Google Cloud</div>
+        </div>
+        <span class="event-status status-past">Completed</span>
+        <div class="event-name">Google Cloud Next '25</div>
+        <div class="event-details">
+          <div class="event-date">Apr 9–11, 2025</div>
+          <div class="event-location">Las Vegas, NV</div>
+        </div>
+        <p class="event-desc">Major launches in generative AI, agentic AI patterns, and cloud security. Featured 40+ security sessions, immersive demos, and Mandiant expert tracks — plus hands-on labs in BigQuery, Spark ML, and Vertex AI pipelines.</p>
+        <div class="event-tags">
+          <span class="event-tag">Gen AI</span>
+          <span class="event-tag">Cloud Security</span>
+          <span class="event-tag">Spark ML</span>
+          <span class="event-tag">Mandiant</span>
+        </div>
+        <span class="event-cta">Recap ↗</span>
+      </a>
+
+      <!-- Google Cloud Agentic Work -->
+      <a href="https://cloud.google.com/events" target="_blank" class="event-card reveal reveal-delay-5" style="--ev-color: var(--teal);">
+        <div class="event-brand">
+          <div class="event-brand-icon">G</div>
+          <div class="event-brand-name">Google Cloud</div>
+        </div>
+        <span class="event-status status-upcoming">Upcoming</span>
+        <div class="event-name">Agentic Work: Live + Labs</div>
+        <div class="event-details">
+          <div class="event-date">2026 Series</div>
+          <div class="event-location">Virtual & In-Person</div>
+        </div>
+        <p class="event-desc">Immersive event series for building and deploying AI agents — hands-on labs with Google Cloud engineers covering multi-agent orchestration, autonomous workflow design, and production-scale agent deployment.</p>
+        <div class="event-tags">
+          <span class="event-tag">AI Agents</span>
+          <span class="event-tag">Hands-on Labs</span>
+          <span class="event-tag">Multi-Agent</span>
+        </div>
+        <span class="event-cta">Register ↗</span>
+      </a>
+
+      <!-- Google Wednesday Build Hour -->
+      <a href="https://developers.google.com/events" target="_blank" class="event-card reveal reveal-delay-6" style="--ev-color: var(--orange);">
+        <div class="event-brand">
+          <div class="event-brand-icon">G</div>
+          <div class="event-brand-name">Google Developers</div>
+        </div>
+        <span class="event-status status-upcoming">Ongoing</span>
+        <div class="event-name">Wednesday Build Hour</div>
+        <div class="event-details">
+          <div class="event-date">Weekly</div>
+          <div class="event-location">Virtual</div>
+        </div>
+        <p class="event-desc">Weekly expert-led sessions to sharpen cloud and AI skills — covering practical builds, new product features, and connecting with the global builder community through live coding and Q&amp;A.</p>
+        <div class="event-tags">
+          <span class="event-tag">Weekly</span>
+          <span class="event-tag">Live Coding</span>
+          <span class="event-tag">Cloud Skills</span>
+        </div>
+        <span class="event-cta">Join ↗</span>
+      </a>
 
     </div>
   </div>
