@@ -2142,6 +2142,107 @@
       <p class="section-label">Work</p>
       <h2 class="section-title">Featured <em>Projects</em></h2>
     </div>
+
+    <div class="reveal" style="margin-bottom:1.5rem;">
+      <p class="section-label" style="color:var(--amber);">🟢 Building in Public · 2026</p>
+      <p style="max-width:60ch;color:var(--text-dim);font-size:0.95rem;line-height:1.6;">
+        Five production-grade systems I'm actively building one phase at a time — every push
+        ships tested code, CI, and a plain-language design note. Spanning streaming ML,
+        probabilistic forecasting, agentic data pipelines, LLM evaluation, and multi-agent retrieval.
+      </p>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-num">01</div>
+        <span class="project-badge-green">🟢 Active · Streaming ML</span>
+        <div class="project-title">sentinel-iam — Real-Time IAM Anomaly Detection</div>
+        <p class="project-desc">Streaming auth-log platform that flags anomalous and out-of-distribution IAM events in near-real-time. Kafka ingestion → PySpark Structured Streaming → an ensemble of Isolation Forest, clustering, and log-embedding OOD detection, with drift monitoring and a FastAPI scoring service. Schema-validated event model and resilient normalization with dead-lettering.</p>
+        <div class="project-footer">
+          <div class="tech-chips">
+            <span class="chip">Kafka</span>
+            <span class="chip">PySpark</span>
+            <span class="chip">Isolation Forest</span>
+            <span class="chip">OOD Detection</span>
+            <span class="chip">FastAPI</span>
+          </div>
+          <a href="https://github.com/VenkateswarluNagineni/sentinel-iam" target="_blank" class="project-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-num">02</div>
+        <span class="project-badge-green">🟢 Active · Forecasting</span>
+        <div class="project-title">quantrisk — Probabilistic Financial Risk Forecasting</div>
+        <p class="project-desc">Market-volatility and credit-risk forecasting service with calibrated uncertainty. Combines XGBoost/LightGBM/ARIMA with conformal-prediction intervals and Google's TimesFM foundation model for zero-shot forecasting, on a rigorous, leakage-safe walk-forward backtesting harness with Sharpe, VaR, drawdown, and interval-coverage reporting.</p>
+        <div class="project-footer">
+          <div class="tech-chips">
+            <span class="chip">Conformal Prediction</span>
+            <span class="chip">TimesFM</span>
+            <span class="chip">XGBoost</span>
+            <span class="chip">Backtesting</span>
+            <span class="chip">MLflow</span>
+          </div>
+          <a href="https://github.com/VenkateswarluNagineni/quantrisk" target="_blank" class="project-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-3">
+        <div class="project-num">03</div>
+        <span class="project-badge-indigo">🟢 Active · Agentic + Geospatial</span>
+        <div class="project-title">aegis-disaster-intel — Event-Driven Disaster Intelligence</div>
+        <p class="project-desc">Ingests live public hazard feeds (USGS earthquakes, NASA FIRMS wildfires, NOAA alerts), deduplicates via change detection, enriches with an agentic LangChain workflow, scores geospatial risk with GeoPandas/H3, and serves a RAG query layer — event-driven rather than naive polling, with a source-agnostic canonical hazard schema.</p>
+        <div class="project-footer">
+          <div class="tech-chips">
+            <span class="chip">LangChain</span>
+            <span class="chip">GeoPandas / H3</span>
+            <span class="chip">FAISS · RAG</span>
+            <span class="chip">Event-Driven</span>
+            <span class="chip">Airflow</span>
+          </div>
+          <a href="https://github.com/VenkateswarluNagineni/aegis-disaster-intel" target="_blank" class="project-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-4">
+        <div class="project-num">04</div>
+        <span class="project-badge-green">🟢 Active · GenAI / LLMOps</span>
+        <div class="project-title">lens-llm-eval — LLM Evaluation &amp; Guardrails Framework</div>
+        <p class="project-desc">A pip-installable library and service to evaluate and guard LLM outputs: groundedness/hallucination scoring, PII guardrails with redaction, OOD-prompt detection, confidence calibration, and a pluggable evaluator interface that aggregates suite scores — designed to slot into a CI regression gate that fails the build when a metric regresses.</p>
+        <div class="project-footer">
+          <div class="tech-chips">
+            <span class="chip">LLM Eval</span>
+            <span class="chip">Guardrails</span>
+            <span class="chip">Calibration</span>
+            <span class="chip">Pytest / CI</span>
+            <span class="chip">Pydantic</span>
+          </div>
+          <a href="https://github.com/VenkateswarluNagineni/lens-llm-eval" target="_blank" class="project-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-5">
+        <div class="project-num">05</div>
+        <span class="project-badge-indigo">🟢 Active · Multi-Agent</span>
+        <div class="project-title">atlas-agent — Agentic Analytics Assistant</div>
+        <p class="project-desc">A production multi-agent system that answers analytical questions over data: a planner decomposes the question, tool-using sub-agents (SQL, retrieval, code) execute, and a synthesizer composes a cited answer. Hybrid retrieval fuses lexical BM25 + dense vectors via reciprocal rank fusion, with tracing, caching, and evals wired in from lens-llm-eval.</p>
+        <div class="project-footer">
+          <div class="tech-chips">
+            <span class="chip">Multi-Agent</span>
+            <span class="chip">Hybrid Retrieval · RRF</span>
+            <span class="chip">BM25 + FAISS</span>
+            <span class="chip">Tool Calling</span>
+            <span class="chip">FastAPI</span>
+          </div>
+          <a href="https://github.com/VenkateswarluNagineni/atlas-agent" target="_blank" class="project-link">GitHub →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="reveal" style="margin:2.5rem 0 1.5rem;">
+      <p class="section-label">Selected Earlier Work</p>
+    </div>
     <div class="projects-grid">
 
       <div class="project-card reveal reveal-delay-1">
